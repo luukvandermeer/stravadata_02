@@ -1,0 +1,166 @@
+<!--
+
+UPLOAD TO GIT!!!!!
+
+Design
+- Fonts Calibre, Domaine & Filmotype Giant
+- Introduction page
+- Userflow from page to strava
+- font Sizing
+- Colouring
+
+
+D3
+V Create event count
+V Calculaition alone rides vs TOGETHER. -> NEED TOGETHER RIDE
+V Calculation time workouts alone vs Together
+- Change time Alone vs Together to distance? -> Doesn't work for other workouts
+V Count countries
+V Separation Countries
+V Transition numbers TWEEN - http://4waisenkinder.de/blog/2014/05/11/d3-dot-js-tween-in-detail/
+
+
+CHART
+- Fix lines
+- Chart dots begin and end event
+- Fix X axis (months)
+- Fix Y axis (times)
+- Animation chart
+- Animation numbers -> https://observablehq.com/@d3/transition-texttween
+
+
+HORIZONTAL BARCHARTS
+- https://observablehq.com/@andrew1johnston/horizontal-bar-chart-a-la-feltron-annual-report-2013
+
+LINECHART
+- https://observablehq.com/@barrerajulio/d3-area-multi-line-experiment
+- Add pattern -> https://stackoverflow.com/questions/17776641/fill-rect-with-pattern
+- Add pattern -> https://medium.com/@louisemoxy/how-to-create-a-d3-js-stacked-area-chart-with-pattern-fills-3bc4585a36ca
+- D3 patterns -> https://iros.github.io/patternfills/sample_d3.html
+
+
+CSS
+- Create header, main, footer for each METRIC box (maybe flexbox)
+- Sizing fonts (depending input)
+-
+
+
+count -->
+
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Feltron Reports</title>
+  <link href="/css/main.css" rel="stylesheet">
+
+  <script type="text/javascript" src="/js/d3.min.js"></script>
+  <script type="text/javascript" src="/js/d3-array.min.js"></script>
+        <script type="text/javascript" src="/js/script.js"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Oswald|PT+Mono&display=swap" rel="stylesheet">
+  <link href="//db.onlinewebfonts.com/c/510c631b494ab204ca3399d91a9074f6?family=FilmotypeGiant" rel="stylesheet">
+</head>
+
+<body>
+
+  <div id="container">
+    <header>
+      <h2>How did my year</h2>
+      <h1>LOOKLIKE?</h1>
+      <hr class="breakLine">
+      <h3>ACTIVITIES IN </h3>
+    </header>
+
+
+    <section>
+      <div class="chart">
+        <script type="text/javascript" src="/js/script.js"></script>
+      </div>
+    </section>
+
+    <main>
+      <div class="metric">
+        <h4>TOTAL WORKOUTS</h4>
+        <h6><span class="workoutsCount" id="valuesMain"></span></h6>
+        <h5>About <span class="workoutsCountWeek" id="valuesFooter"> </span> workouts per week</h5>
+        <hr class="breakLine">
+      </div>
+      <div class="metric">
+        <h4>ACTIVE HOURS PER DAY</h4>
+        <h6><span class="workoutsHoursPerDay" id="valuesMain"></span></h6>
+        <h5>A total of <span class="workoutsHoursTotal" id="valuesFooter"></span> workout hours</h5>
+        <hr class="breakLine">
+      </div>
+      <div class="metric">
+        <h4>WORKOUTS ALONE/TOGETHER</h4>
+        <h6><span class="workoutsAlone" id="valuesMain"></span>/<span class="workoutsTogether" id="valuesMain"></span></h6>
+        <h5>Duration of workouts together were <span class="workoutsHoursChange" id="valuesFooter"></span><span class="workoutsAloneTogether" id="valuesFooter"></span></h5>
+        <hr class="breakLine">
+      </div>
+      <div class="metric">
+        <h4>WORKOUTS IN COUNTRIES</h4>
+        <h6><span class="countriesVisitedCount"></span></h6>
+        <h5><span class="countriesVisited" id="valuesFooter"></span></h5>
+        <hr class="breakLine">
+      </div>
+
+
+
+      <div class="metric">
+        <h4>Test</h4>
+        <h6>4</h6>
+        <h5>Workouts</h5>
+        <hr class="breakLine">
+
+      </div>
+      <div class="metric">
+        <h4>Test</h4>
+        <h6>4</h6>
+        <h5>Workouts</h5>
+        <hr class="breakLine">
+      </div>
+      <div class="metric">
+        <h4>Test</h4>
+        <h6>8</h6>
+        <h5>Workouts</h5>
+        <hr class="breakLine">
+      </div>
+      <div class="metric">
+        <h4>Test</h4>
+        <h6>8</h6>
+        <h5>Workouts</h5>
+        <hr class="breakLine">
+      </div>
+
+      <div class="metric">
+      <h4>Test</h4>
+      <div class="barchart">
+          <script type="text/javascript" src="/bars.js"></script>
+      </div>
+      </div>
+
+
+
+      <div class="metric">Test 3</div>
+      <div class="metric">Test 3</div>
+      <div class="metric">Test 1</div>
+      <div class="metric">Test 2</div>
+      <div class="metric">Test 3</div>
+      <div class="metric">Test 3</div>
+      <div class="metric">Test 1</div>
+    </main>
+
+    <footer>
+      <p>Footer</p>
+    </footer>
+
+  </div>
+</body>
+
+</html>

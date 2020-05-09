@@ -1,0 +1,168 @@
+h1 {
+  font-family: PT Mono;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 42px;
+  line-height: 134.5%;
+  letter-spacing: 0.15em;
+  color: #fff;
+  margin: 0px 0px 0px 0px;
+}
+
+h2 {
+  font-family: PT Mono;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 100%;
+  color: #55546E;
+  margin: 0px 0px 0px 0px;
+}
+
+h3 {
+  font-family: PT Mono;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 100%;
+  color: #55546E;
+  margin: 0px 0px 0px 0px;
+}
+
+h4 {
+  font-family: PT Mono;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 100%;
+  color: #55546E;
+}
+
+h5 {
+  font-family: PT Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 100%;
+  display: flex;
+  align-items: flex-end;
+  color: #55546E;
+}
+
+h6 {
+  font-family: FilmotypeGiant;
+  font-style: light;
+  font-weight: 300;
+  font-size: 150px;
+  line-height: 100%;
+  letter-spacing: -0.02em;
+  color: #55546E;
+  margin: 0px 0px 0px 0px;
+  }
+
+body {
+  background-color: #55546E;
+  width: 100%;
+}
+
+.breakLine {
+  border: .1px dashed #55546E;
+  /* border-color:  */
+}
+
+#container {
+  display: grid;
+  background: #FCE545;
+  grid-template-areas:
+    "header header header header"
+    "chart chart chart chart"
+    "content content content content"
+    "footer footer footer footer";
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 150px 500px .5fr 80px;
+  grid-gap: 10px;
+  max-width: 800px;
+  margin: auto;
+  padding: 0px 51px 0px 51px;
+}
+
+header {
+  grid-row: header;
+  grid-column: header;
+  padding-top: 34px;
+}
+
+section {
+  grid-row: chart;
+  grid-column: chart;
+  max-width: 800px;
+}
+
+main {
+  grid-row: content;
+  grid-column: content;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 5px;
+  height: 1000px;
+}
+
+footer {
+  grid-row: footer;
+  grid-column: footer;
+}
+
+header, main, footer {
+  border: 1px dashed;
+}
+
+/* CHART */
+.chart {
+  width: 800px;
+  height: 500px;
+  border: solid 1px #000;
+}
+
+svg {
+  background-color: #fff;
+}
+
+.barchart {
+  width: 200px;
+  height: 200px;
+  border: solid 1px #000;
+      background-color: #fff;
+}
+
+barchart {
+    background-color: #fff;
+}
+
+
+/* METRICS */
+.metric {
+  /* background: lightcoral; */
+  padding: 4px;
+  height: 250px;
+  /* border: 1px solid; */
+}
+
+.metric1 {
+  background: #fff;
+  padding: 4px;
+  height: 200px;
+  border: 1px solid;
+}
+
+
+/* VALUES */
+#valuesMain{
+  /* margin: 0px 3px 0px 3px; */
+  /* color: #fff; */
+}
+
+#valuesFooter{
+  margin: 0px 3px 0px 3px;
+  /* text-transform: uppercase; */
+  /* color: #fff; */
+}
