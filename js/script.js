@@ -59,7 +59,19 @@ var countriesVisitedCount = d3.nest() //create seperate array to count the value
   .key(function(d) {return d.location_country;})
   .entries(data);
 var countriesVisited = d3.map(data, function(d) {return d.location_country}).keys();
+// var tuffestDay = d3.max(data, d => d.suffer_score)
+var tuffestDay = d3.max(data, function (d) {if (d.suffer_score>=(d3.max(data, d => d.suffer_score))) {return d.start_date_local}}) //determine tuffestscore and get start_date_local
 
+
+
+// var tuffestDay2 = d3.timeFormat("%a %d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(tuffestDay));
+//
+// console.log(tuffestDay2);
+// var date = d3.timeParse("%Y-%m-%dT%H:%M:%SZ")("2020-02-23T23:53:06Z");
+// var date = d3.timeParse("%Y-%m-%dT%H:%M:%SZ")("2020-02-23T23:53:06Z");
+// console.log(date);
+// var date2 = d3.timeFormat("%a %d")(date);
+// console.log(date2);
 
 //Add variables to span
 // d3.select(".workoutsCount").text((workoutsCount))
@@ -72,7 +84,7 @@ d3.select(".workoutsTogether").text(0).transition().delay(600).tween('text', twe
 d3.select(".workoutsHoursChange").text((d3.format("+.0%")((workoutsHoursTogetherMean-workoutsHoursAloneMean)/workoutsHoursAloneMean))+" "+(workoutsAloneTogether))
 d3.select(".countriesVisitedCount").text(d3.format(",.0f")(countriesVisitedCount.length))
 d3.select(".countriesVisited").text((countriesVisited.join(' | ')))
-
+d3.select(".tuffestDay").text(d3.timeFormat("%a %d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(tuffestDay)))//Calculate date format to timeParse and the to timeFormat Month day
 
 // Tween animation of numbers
       function tweenText( newValue ) {

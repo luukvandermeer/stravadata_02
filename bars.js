@@ -18,7 +18,6 @@ d3.json('data.json').then(function(data) {
       .attr('y', 12)
       .attr('width', function(d,i) {return d.average_speed})
       .attr('height', 3)
-
   // barcharts.selectAll('.dot')
   //   .data(data)
   //   .enter()
