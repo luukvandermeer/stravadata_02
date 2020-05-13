@@ -31,33 +31,32 @@ h3 {
 
 h4 {
   font-family: PT Mono;
-  font-style: normal;
   font-weight: bold;
   font-size: 10px;
   line-height: 100%;
   color: #55546E;
+  margin: 4px 0px 0px 4px;
 }
 
 h5 {
   font-family: PT Sans;
-  font-style: normal;
   font-weight: normal;
   font-size: 10px;
   line-height: 100%;
   display: flex;
-  align-items: flex-end;
+  /* align-items: flex-end; */
   color: #55546E;
+  margin: 4px 0px 4px 4px;
 }
 
 h6 {
   font-family: FilmotypeGiant;
-  font-style: light;
   font-weight: 300;
   font-size: 150px;
   line-height: 100%;
   letter-spacing: -0.02em;
   color: #55546E;
-  margin: 0px 0px 0px 0px;
+  margin: 0px 0px -20px 0px;
   }
 
 body {
@@ -79,7 +78,7 @@ body {
     "content content content content"
     "footer footer footer footer";
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 150px 500px .5fr 80px;
+  grid-template-rows: 150px 500px .05fr 80px;
   grid-gap: 10px;
   max-width: 800px;
   margin: auto;
@@ -104,7 +103,7 @@ main {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 5px;
-  height: 1000px;
+  height: auto;
 }
 
 footer {
@@ -138,12 +137,24 @@ barchart {
     background-color: #fff;
 }
 
+.area {
+  width: 200px;
+  height: 200px;
+  border: solid 1px #000;
+      background-color: #55546E;
+}
+
+area {
+    background-color: #55546E;
+}
+
+
 
 /* METRICS */
 .metric {
   /* background: lightcoral; */
   padding: 4px;
-  height: 250px;
+  height: auto;
   /* border: 1px solid; */
 }
 
