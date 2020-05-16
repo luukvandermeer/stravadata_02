@@ -61,15 +61,15 @@ var countriesVisitedCount = d3.nest() //create seperate array to count the value
 var countriesVisited = d3.map(data, function(d) {return d.location_country}).keys();
 var tuffestDay = d3.max(data, function (d) {if (d.suffer_score>=(d3.max(data, d => d.suffer_score))) {return d.start_date_local}}) //determine tuffestscore and get start_date_local
 var tuffestDayDetails = d3.max(data, function (d) {if (d.suffer_score>=(d3.max(data, d => d.suffer_score))) {return [(d3.format(",.1f")((d.distance/1000)))+"km", d.total_elevation_gain+"m", (d3.format(",.1f")(d.moving_time/3600))+"h", d.suffer_score+"pt"]}})//determine tuffestscore and get details
-var farthestDistance = d3.max(data, function (d) {if (d.distance>=(d3.max(data, d => d.distance))) {return (d.distance/1000)}})
-var farthestDistanceDetails = d3.max(data, function (d) {if (d.distance>=(d3.max(data, d => d.distance))) {return [(d3.timeFormat("%b %d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))), (d3.format(",.1f")(d.moving_time/3600))+"h"]}})
+var farthestDistance = d3.max(data, function (d) {if (d.distance>=(d3.max(data, d => d.distance))) {return (d.distance)}})
+var farthestDistanceDetails = d3.max(data, function (d) {if (d.distance>=(d3.max(data, d => d.distance))) {return [(d3.timeFormat("%B %d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))), (d3.format(",.1f")(d.moving_time/3600))+"h"]}})//determine farthestDistance and get details
+// var shortestDistance = d3.min(data, function (d) {if (d.distance>0.1){return d.distance}})
+// console.log(shortestDistance);
+var climbing = d3.sum(data, function(d) {return d.total_elevation_gain})
+var climbingDetails = climbing/8848
 
-
-var shortestDistance = d3.min(data, function (d) {if (((d3.min(data, d => d.distance)>=(0.1))) && (d.distance<=(d3.min(data, d => d.distance)))) {return (d.distance/1000)}})
-// var shortestDistanceDetails = d3.min(data, function (d) {if (d.distance<=(d3.min(data, d => d.distance))) {return [(d3.timeFormat("%b %d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))), (d3.format(",.1f")(d.moving_time/3600))+"h"]}})
-
-console.log(shortestDistance);
-// console.log(shortestDistanceDetails);
+var calories =  d3.sum(data, function(d) {return d.kilojoules/0.239})
+var caloriesDetails = calories/280
 
 //Add variables to span
 // d3.select(".workoutsCount").text((workoutsCount))
@@ -82,13 +82,16 @@ d3.select(".workoutsTogether").text(0).transition().delay(600).tween('text', twe
 d3.select(".workoutsHoursChange").text((d3.format("+.0%")((workoutsHoursTogetherMean-workoutsHoursAloneMean)/workoutsHoursAloneMean))+" "+(workoutsAloneTogether))
 d3.select(".countriesVisitedCount").text(d3.format(",.0f")(countriesVisitedCount.length))
 d3.select(".countriesVisited").text((countriesVisited.join(' | ')))
-d3.select(".tuffestDay").text(d3.timeFormat("%a %d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(tuffestDay)))//Calculate date format to timeParse and the to timeFormat Month day
+d3.select(".tuffestDay").text(d3.timeFormat("%b %d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(tuffestDay)))//Calculate date format to timeParse and the to timeFormat Month day
 d3.select(".tuffestDayDetails").text((tuffestDayDetails.join(' | ')))
 d3.select(".farthestDistance").text((d3.format(",.0f")((farthestDistance))))
 d3.select(".farthestDistanceDetails").text((farthestDistanceDetails.join(' | ')))
-
-
-
+// d3.select(".shortestDistance").text((d3.format(",.0f")((shortestDistance))))
+// d3.select(".shortestDistanceDetails").text((shortestDistanceDetails.join(' | ')))
+d3.select(".climbing").text(d3.format(",.0f")(climbing)+"m")
+d3.select(".climbingDetails").text(d3.format(".1f")(climbingDetails)+"x")
+d3.select(".calories").text(d3.format(",.0f")(calories))
+d3.select(".caloriesDetails").text(d3.format(",.0f")(caloriesDetails))
 
 
 // Tween animation of numbers

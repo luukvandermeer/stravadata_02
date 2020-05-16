@@ -19,6 +19,8 @@ V Formating Time timeFormat https://bl.ocks.org/zanarmstrong/raw/ca0adb7e426c12c
 V CALCULATION TUFFEST DAY make easier
 - timeformat Seconds to HH:MM:SS
 V Farthest distance
+V Climbing + Calories BURNED
+
 > shortest distance
 
 CHART
@@ -57,8 +59,12 @@ count -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Feltron Reports</title>
-  <link href="/css/main.css" rel="stylesheet">
 
+<!-- CSS -->
+  <link href="/css/main.css" rel="stylesheet">
+  <!-- Favicon -->
+<link rel="shortcut icon" type="image/png" href="image/LvdM-06.png">
+  <!-- JS -->
   <script type="text/javascript" src="/js/d3.min.js"></script>
   <script type="text/javascript" src="/js/d3-array.min.js"></script>
   <script type="text/javascript" src="/js/script.js"></script>
@@ -165,9 +171,22 @@ count -->
       <div class="metric">Test 1</div>
       <div class="metric">Test 2</div>
       <div class="metric">Test 3</div>
-      <div class="metric">Test 3</div>
-
+      <div class="metric">shortest distance</div>
       <div class="metric">Test 1</div>
+      <div class="metric">Test 1</div>
+      <div class="metric">Test 2</div>
+      <div class="metric">
+        <h4>TOTAL CLIMBING</h4>
+        <h6><span class="climbing"></span></h6>
+        <h5>That's <span class="climbingDetails" id="valuesFooter"></span> the Mount Everest</h5>
+        <hr class="breakLine">
+      </div>
+      <div class="metric">
+        <h4>CALORIES BURNED</h4>
+        <h6><span class="calories"></span></h6>
+        <h5>This is equal to <span class="caloriesDetails" id="valuesFooter"></span> slices of apple pie</h5>
+        <hr class="breakLine">
+      </div>
     </main>
 
     <footer>
