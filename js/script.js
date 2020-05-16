@@ -59,9 +59,7 @@ var countriesVisitedCount = d3.nest() //create seperate array to count the value
   .key(function(d) {return d.location_country;})
   .entries(data);
 var countriesVisited = d3.map(data, function(d) {return d.location_country}).keys();
-// var tuffestDay = d3.max(data, d => d.suffer_score)
 var tuffestDay = d3.max(data, function (d) {if (d.suffer_score>=(d3.max(data, d => d.suffer_score))) {return d.start_date_local}}) //determine tuffestscore and get start_date_local
-
 
 
 // var tuffestDay2 = d3.timeFormat("%a %d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(tuffestDay));
