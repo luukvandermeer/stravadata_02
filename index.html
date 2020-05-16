@@ -16,8 +16,10 @@ V Count countries
 V Separation Countries
 V Transition numbers TWEEN - http://4waisenkinder.de/blog/2014/05/11/d3-dot-js-tween-in-detail/
 V Formating Time timeFormat https://bl.ocks.org/zanarmstrong/raw/ca0adb7e426c12c06a95/
-> CALCULATION TUFFEST DAY moet gemakkelijker, hierdoor ook andere variabele in array (km, tijd etc) aanwijzen
-
+V CALCULATION TUFFEST DAY make easier
+- timeformat Seconds to HH:MM:SS
+V Farthest distance
+> shortest distance
 
 CHART
 - Fix lines
@@ -132,7 +134,7 @@ count -->
       <div class="metric">
         <h4>TUFFESTDAY</h4>
         <h6><span class="tuffestDay"></span></h6>
-        <h5>Workouts</h5>
+        <h5><span class="tuffestDayDetails" id="valuesFooter"></span></h5>
         <hr class="breakLine">
       </div>
 
@@ -153,11 +155,18 @@ count -->
         </div>
 
       </div>
-      <div class="metric">Test 3</div>
+      <div class="metric">
+        <h4>FARTHEST DISTANCE</h4>
+        <h6><span class="farthestDistance"></span></h6>
+        <h5><span class="farthestDistanceDetails" id="valuesFooter"></span></h5>
+        <hr class="breakLine">
+      </div>
+
       <div class="metric">Test 1</div>
       <div class="metric">Test 2</div>
       <div class="metric">Test 3</div>
       <div class="metric">Test 3</div>
+
       <div class="metric">Test 1</div>
     </main>
 
