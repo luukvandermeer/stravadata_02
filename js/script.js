@@ -75,6 +75,8 @@ d3.json('data.json').then(function(data) {
     // return parseFloat(d3.timeFormat("%j")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))); //calculate first data and last day of excersize
   });
 
+
+
   yMinMax = d3.extent(data, function(d) {
     return parseFloat(d3.timeFormat("%S")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))); //calculate
   });
@@ -84,7 +86,7 @@ console.log(yMinMax);
 
 
 
-  //Add Y & X axis
+  //Add Y & X scale
   xScale = d3.scaleLinear()
     .domain([0, 366])
     .range([0, 800]);
