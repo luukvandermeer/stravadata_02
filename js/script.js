@@ -1,4 +1,4 @@
-var margin = 0,
+var margin = 24,
   width = 800,
   height = 500;
 
@@ -7,6 +7,8 @@ var svg = d3.select('.chart')
   .attr('width', width + 'px')
   .attr('height', height + 'px')
 
+
+//VARIABLES & METRICS
 d3.json('data.json').then(function(data) {
   // variables calculations
   var workoutsCount = d3.count(data, d => d.id);
@@ -53,7 +55,6 @@ d3.json('data.json').then(function(data) {
   d3.select(".calories").text(d3.format(",.0f")(calories))
   d3.select(".caloriesDetails").text(d3.format(",.0f")(caloriesDetails))
 
-
   // Tween animation of numbers
   function tweenText(newValue) {
     return function() {
@@ -69,82 +70,118 @@ d3.json('data.json').then(function(data) {
 
 });
 
+
+//CHART
 d3.json('data.json').then(function(data) {
 
   xMinMax = d3.extent(data, function(d) {
     // return parseFloat(d3.timeFormat("%j")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))); //calculate first data and last day of excersize
   });
 
-
-
   yMinMax = d3.extent(data, function(d) {
-    return parseFloat(d3.timeFormat("%S")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))); //calculate
+    // return parseFloat(d3.timeFormat("%s")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))); //calculate UNIX EPOCH
+    // return parseFloat(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local));
   });
 
-console.log(yMinMax);
 
-
-
-
-  //Add Y & X scale
+  //ADD SCALE
   xScale = d3.scaleLinear()
     .domain([0, 366])
-    .range([0, 800]);
+    .range([margin, 800]);
 
-  yScale = d3.scaleLinear()
-  .domain([])
-  .range([]);
-  //lines
-  lines = svg.selectAll('.line')
-    .data(data)
-    .enter()
-    .append('line')
-    .attr('class', 'line')
-    .attr('x1', function(d) {
-      return xScale(parseFloat(d3.timeFormat("%j")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))); //calculates which day of the year
-    })
-    .attr('x2', function(d) {
-      return xScale(parseFloat(d3.timeFormat("%j")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))); //calculates which day of the year
-    })
-    .attr('y1', function(d) {
-      return d.elapsed_time / 1000;
-    })
-    .attr('y2', function(d) {
-      return d.elapsed_time / 10;
-    })
-    .attr('stroke', '#000')
+var xValue = d3.extent(data, function(d){
+  return (d.start_date_local);
+})
+console.log(xValue);
 
-  //circles
-  circlesX1 = svg.selectAll('.circle')
-    .data(data)
-    .enter()
-    .append('circle')
-    .attr('cx', function(d) {
-      return xScale(parseFloat(d3.timeFormat("%j")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))); //calculates which day of the year
-    })
-    .attr('cy', function(d) {
-      return d.elapsed_time / 1000;
-    })
-    .attr('r', 3)
-    .attr('width', 20)
-    .attr('height', 20)
-    .style('fill', '#55546E');
+yScale = d3.scaleTime()
+.domain([xValue[0], xValue[1]])
+// .domain([new Date(2020, 01, 1), new Date(2020, 12, 31)])
+.range([500, 0])
+.nice();
+
+// Add a scale to the fill or stroke of the circles/lines
+// cScale = d3.scaleOrdinal()
+// .domain([0,1])
+// .range(['#333', '#ff6600'])
+
+
+//ADD AXIS
+xAxis = d3.axisBottom(xScale).tickValues([40,200,300]);
+yAxis = d3.axisLeft(yScale);
+
+xAxisG = svg.append('g') //group element xAxis
+.attr('id', 'xAxis')
+.attr('class', 'xAxis');
+
+yAxisG = svg.append('g') //group element yAxis
+.attr('id', 'yAxis')
+.attr('class', 'yAxis');
+
+xAxisG.call(xAxis) //syntax to call xAxis
+  .attr('transform', 'translate(0,' + (450) +')');
+  // .attr('transform', 'translate(0,' + (height-margin) +')');
+
+yAxisG.call(yAxis) //syntax to call xAxis
+.attr('transform', 'translate(100,50)');
+
+
+
+//LINES
+  // lines = svg.selectAll('.line')
+  //   .data(data)
+  //   .enter()
+  //   .append('line')
+  //   .attr('class', 'line')
+  //   .attr('x1', function(d) {
+  //     return xScale(parseFloat(d3.timeFormat("%j")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))); //calculates which day of the year
+  //   })
+  //   .attr('x2', function(d) {
+  //     return xScale(parseFloat(d3.timeFormat("%j")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))); //calculates which day of the year
+  //   })
+  //   .attr('y1', function(d) {
+  //     return d.elapsed_time / 1000;
+  //   })
+  //   .attr('y2', function(d) {
+  //     return d.elapsed_time / 10;
+  //   })
+  //   .attr('stroke', '#000')
+
+//CIRCLES
+  // circlesX1 = svg.selectAll('.circle')
+  //   .data(data)
+  //   .enter()
+  //   .append('circle')
+  //   .attr('cx', function(d) {
+  //     return xScale(parseFloat(d3.timeFormat("%j")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))); //calculates which day of the year
+  //   })
+  //   .attr('cy', function(d) {
+  //     return d.elapsed_time / 1000;
+  //   })
+  //   .attr('r', 3)
+  //   .attr('width', 20)
+  //   .attr('height', 20)
+  //   .style('fill', '#55546E');
 
   circlesX2 = svg.selectAll('.circle')
     .data(data)
     .enter()
     .append('circle')
     .attr('cx', function(d) {
-      return xScale(parseFloat(d3.timeFormat("%j")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))); //calculates which day of the year
+      return xScale(parseFloat(d3.timeFormat("%j")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))) //calculates which day of the year
     })
     .attr('cy', function(d) {
-      return d.elapsed_time / 10;
+      // return yScale(parseFloat(d3.timeFormat("%Y, %m, %d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))));
+      return yScale(parseFloat(d.start_date_local))
     })
     .attr('r', 3)
     .attr('width', 20)
     .attr('height', 20)
     .style('fill', '#55546E');
+
+
 });
+
 
 
 

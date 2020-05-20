@@ -126,6 +126,15 @@ svg {
   background-color: #fff;
 }
 
+.xAxis line, xAxis path{
+  stroke: #bbb;
+}
+.xAxis text{
+  fill: #bbb;
+}
+
+
+
 .barchart {
   width: 200px;
   height: 200px;
