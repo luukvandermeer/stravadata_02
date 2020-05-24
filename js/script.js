@@ -74,6 +74,10 @@ d3.json('data.json').then(function(data) {
 //CHART
 d3.json('data.json').then(function(data) {
 
+  var activeYear = d3.min(data, function(d){ //determine year
+    return d3.timeFormat("%Y")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local));
+  });
+
   xMinMax = d3.extent(data, function(d) {
     // return parseFloat(d3.timeFormat("%j")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))); //calculate first data and last day of excersize
   });
@@ -83,22 +87,41 @@ d3.json('data.json').then(function(data) {
     // return parseFloat(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local));
   });
 
-
-  //ADD SCALE
-  xScale = d3.scaleLinear()
-    .domain([0, 366])
-    .range([margin, 800]);
+//ADD SCALE
+xScale = d3.scaleTime()
+    .domain([new Date (activeYear,00,01), new Date(activeYear,11,30)]) //January = 00
+    .nice()
+    .range([1, 365]);
 
 var xValue = d3.extent(data, function(d){
   return (d.start_date_local);
-})
+});
 console.log(xValue);
+
+
+
+
+
+
+//Y example axis
+
+//DOESN't WORK BECAUSE IT TAKES THE 24H OF A SPECIFIC DAY, INSTEAD OF TIMEUNIT 00:00:00
+var scaleTest = d3.scaleTime()
+ .domain([new Date("2020-03-31 00:00:00"), new Date("2020-03-31 23:59:59")])
+.nice()
+.range([0,86400]);
+
+console.log(scaleTest(new Date("2020-03-31 00:00:42")));
+
+
+
 
 yScale = d3.scaleTime()
 .domain([xValue[0], xValue[1]])
 // .domain([new Date(2020, 01, 1), new Date(2020, 12, 31)])
-.range([500, 0])
+.range([0, 500])
 .nice();
+
 
 // Add a scale to the fill or stroke of the circles/lines
 // cScale = d3.scaleOrdinal()
@@ -168,11 +191,12 @@ yAxisG.call(yAxis) //syntax to call xAxis
     .enter()
     .append('circle')
     .attr('cx', function(d) {
-      return xScale(parseFloat(d3.timeFormat("%j")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))) //calculates which day of the year
+      return xScale(new Date(d3.timeFormat("%Y,%m,%d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))) //calculates which day of the year
     })
     .attr('cy', function(d) {
       // return yScale(parseFloat(d3.timeFormat("%Y, %m, %d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))));
-      return yScale(parseFloat(d.start_date_local))
+      // return yScale(parseFloat(d.start_date_local))
+      return 100;
     })
     .attr('r', 3)
     .attr('width', 20)
@@ -182,7 +206,7 @@ yAxisG.call(yAxis) //syntax to call xAxis
 
 });
 
-
+// d3.time.format("%Y-%m-%d")
 
 
 
