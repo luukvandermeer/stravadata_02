@@ -123,16 +123,25 @@ header, main, footer {
 }
 
 svg {
-  background-color: #fff;
+  /* background-color: #fff; */
 }
 
-.xAxis line, xAxis path{
-  stroke: #bbb;
+.xAxis line, .xAxis path, .yAxis line, .yAxis path {
+  stroke: #FCE545;
 }
-.xAxis text{
-  fill: #bbb;
+.xAxis text {
+  fill: #55546E;
+  font-family: PT Mono;
+  font-style: normal;
+  text-transform: uppercase;
 }
 
+.yAxis text {
+  fill: #55546E;
+  font-family: PT Mono;
+  font-style: normal;
+  text-transform: uppercase;
+}
 
 
 .barchart {
