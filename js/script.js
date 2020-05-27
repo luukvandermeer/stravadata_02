@@ -192,8 +192,6 @@ yAxisG.call(yAxis) //syntax to call xAxis
 
 
     console.log(d3.timeFormat("%H:%M:%S")(parseFloat(d3.timeFormat("%Q")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")("2020-07-24T23:38:40Z")))+1994000));
-
-
     console.log(parseFloat(d3.timeFormat("%Q")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")("2020-02-15T01:24:32Z")))+1);
     console.log((d3.timeFormat("%Q")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")("2020-02-15T01:24:32Z")))+1);
     // (d3.timeFormat("%H:%M:%S")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")((d3.timeFormat("%Q")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")("2020-02-15T01:24:32Z")))+(d.elapsed_time*1000))))
