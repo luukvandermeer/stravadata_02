@@ -29,15 +29,3 @@ d3.json('data.json').then(function(data) {
   //   .attr('fill', '#000')
   //   .call(xAxis)
 });
-
-
-// barcharts.append('rect')
-//   .attr('x', 10)
-//   .attr('y', 10)
-//   .attr('width', 10)
-//   .attr('height', 10)
-//
-// barcharts.append('circle')
-// .attr('cx', 20)
-// .attr('cy', 30)
-// .attr('r', 5)

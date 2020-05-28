@@ -28,7 +28,7 @@ V Try to link d.start_date_local to Y position of circle to testout concept
 V Fix X axis (months)
 V Fix Y axis (times)
 V Chart dots begin and end event
-- Fix lines and dots for event which take longer then one DAY 
+- Fix lines and dots for event which take longer then one DAY
 
 
 
@@ -77,6 +77,8 @@ count -->
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Oswald|PT+Mono&display=swap" rel="stylesheet">
   <link href="//db.onlinewebfonts.com/c/510c631b494ab204ca3399d91a9074f6?family=FilmotypeGiant" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -98,25 +100,25 @@ count -->
     <main>
       <div class="metric">
         <h4>TOTAL WORKOUTS</h4>
-        <h6><span class="workoutsCount" id="valuesMain"></span></h6>
+        <h6><span class="workoutsCount" id="valuesDark"></span></h6>
         <h5>About <span class="workoutsCountWeek" id="valuesFooter"> </span> workouts per week</h5>
         <hr class="breakLine">
       </div>
       <div class="metric">
         <h4>ACTIVE HOURS PER DAY</h4>
-        <h6><span class="workoutsHoursPerDay" id="valuesMain"></span></h6>
+        <h6><span class="workoutsHoursPerDay" id="valuesLight"></span></h6>
         <h5>A total of <span class="workoutsHoursTotal" id="valuesFooter"></span> workout hours</h5>
         <hr class="breakLine">
       </div>
       <div class="metric">
         <h4>WORKOUTS ALONE/TOGETHER</h4>
-        <h6><span class="workoutsAlone" id="valuesMain"></span>/<span class="workoutsTogether" id="valuesMain"></span></h6>
+        <h6><span class="workoutsAlone" id="valuesDark"></span>/<span class="workoutsTogether" id="valuesMain"></span></h6>
         <h5>Duration of workouts together were <span class="workoutsHoursChange" id="valuesFooter"></span><span class="workoutsAloneTogether" id="valuesFooter"></span></h5>
         <hr class="breakLine">
       </div>
       <div class="metric">
         <h4>WORKOUTS IN COUNTRIES</h4>
-        <h6><span class="countriesVisitedCount"></span></h6>
+        <h6><span class="countriesVisitedCount" id="valuesLight"></span></h6>
         <h5><span class="countriesVisited" id="valuesFooter"></span></h5>
         <hr class="breakLine">
       </div>

@@ -203,6 +203,8 @@ yAxisG.call(yAxis) //syntax to call xAxis
 });
 
 
+
+
 // // Adds the svg canvas
 // var	chart2 = d3.select("#test")
 // .append('svg')
