@@ -1,68 +1,5 @@
 
 
-//VARIABLES & METRICS
-d3.json('data.json').then(function(data) {
-  // variables calculations
-  var workoutsCount = d3.count(data, d => d.id);
-  var workoutsCountWeek = workoutsCount / 52; //devide to count week per year
-  var workoutsHours = d3.sum(data, function(d) {return d.elapsed_time / 3600}) //devide to translate to hours
-  var workoutsTogether = d3.count(data, d => {if (d.athlete_count >= 2) {return d.id}})
-  var workoutsHoursAloneMean = d3.mean(data, function(d) {if (d.athlete_count >= 1) {return d.elapsed_time / 3600}}) //devide to translate to hours
-  var workoutsHoursTogetherMean = d3.mean(data, function(d) {if (d.athlete_count >= 2) {return d.elapsed_time / 3600}}) //devide to translate to hours
-  var workoutsAloneTogether;if (((workoutsHoursTogetherMean - workoutsHoursAloneMean) / workoutsHoursAloneMean) >= 0) {workoutsAloneTogether = "longer";} else {workoutsAloneTogether = "shorter"} //if statement for shorter or longer rides together
-  var countriesVisitedCount = d3.nest() //create seperate array to count the values. Calculation in the span
-    .key(function(d) {return d.location_country;})
-    .entries(data);
-  var countriesVisited = d3.map(data, function(d) {return d.location_country}).keys();
-  var tuffestDay = d3.max(data, function(d) {if (d.suffer_score >= (d3.max(data, d => d.suffer_score))) {return d.start_date_local}}) //determine tuffestscore and get start_date_local
-  var tuffestDayDetails = d3.max(data, function(d) {if (d.suffer_score >= (d3.max(data, d => d.suffer_score))) {return [(d3.format(",.1f")((d.distance / 1000))) + "km", d.total_elevation_gain + "m", (d3.format(",.1f")(d.moving_time / 3600)) + "h", d.suffer_score + "pt"]}}) //determine tuffestscore and get details
-  var farthestDistance = d3.max(data, function(d) {if (d.distance >= (d3.max(data, d => d.distance))) {return (d.distance)}})
-  var farthestDistanceDetails = d3.max(data, function(d) {if (d.distance >= (d3.max(data, d => d.distance))) {return [(d3.timeFormat("%B %d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))), (d3.format(",.1f")(d.moving_time / 3600)) + "h"]}}) //determine farthestDistance and get details
-  // var shortestDistance = d3.min(data, function (d) {if (d.distance>0.1){return d.distance}})
-  // console.log(shortestDistance);
-  var climbing = d3.sum(data, function(d) {return d.total_elevation_gain})
-  var climbingDetails = climbing / 8848 //8848m = mountEverest
-  var calories = d3.sum(data, function(d) {return d.kilojoules / 0.239})
-  var caloriesDetails = calories / 280 //280cl is applePie
-
-  //Add variables to span
-  // d3.select(".workoutsCount").text((workoutsCount))
-  d3.select(".workoutsCount").text(0).transition().delay(600).tween('text', tweenText(workoutsCount))
-  d3.select(".workoutsCountWeek").text(d3.format(",.1f")(workoutsCountWeek))
-  d3.select(".workoutsHoursTotal").text(d3.format(",.1f")(workoutsHours))
-  d3.select(".workoutsHoursPerDay").text(d3.format(",.2f")(workoutsHours / 8760)) //devided by total hours a year
-  d3.select(".workoutsAlone").text((workoutsCount - workoutsTogether))
-  d3.select(".workoutsTogether").text(0).transition().delay(600).tween('text', tweenText(workoutsTogether))
-  d3.select(".workoutsHoursChange").text((d3.format("+.0%")((workoutsHoursTogetherMean - workoutsHoursAloneMean) / workoutsHoursAloneMean)) + " " + (workoutsAloneTogether))
-  d3.select(".countriesVisitedCount").text(d3.format(",.0f")(countriesVisitedCount.length))
-  d3.select(".countriesVisited").text((countriesVisited.join(' | ')))
-  d3.select(".tuffestDay").text(d3.timeFormat("%b %d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(tuffestDay))) //Calculate date format to timeParse and the to timeFormat Month day
-  d3.select(".tuffestDayDetails").text((tuffestDayDetails.join(' | ')))
-  d3.select(".farthestDistance").text((d3.format(",.0f")((farthestDistance))))
-  d3.select(".farthestDistanceDetails").text((farthestDistanceDetails.join(' | ')))
-  // d3.select(".shortestDistance").text((d3.format(",.0f")((shortestDistance))))
-  // d3.select(".shortestDistanceDetails").text((shortestDistanceDetails.join(' | ')))
-  d3.select(".climbing").text(d3.format(",.0f")(climbing) + "m")
-  d3.select(".climbingDetails").text(d3.format(".1f")(climbingDetails) + "x")
-  d3.select(".calories").text(d3.format(",.0f")(calories))
-  d3.select(".caloriesDetails").text(d3.format(",.0f")(caloriesDetails))
-
-  // Tween animation of numbers
-  function tweenText(newValue) {
-    return function() {
-      // get current value as starting point for tween animation
-      var currentValue = +this.textContent;
-      // create interpolator and do not show nasty floating numbers
-      var i = d3.interpolateRound(currentValue, newValue);
-      return function(t) {
-        this.textContent = i(t);
-      };
-    }
-  }
-
-});
-
-
 var margin = 48,
   width = 800,
   height = 500;
@@ -201,25 +138,3 @@ yAxisG.call(yAxis) //syntax to call xAxis
     console.log(d3.timeFormat("%H:%M:%S")(1581726272000));
 
 });
-
-
-
-
-// // Adds the svg canvas
-// var	chart2 = d3.select("#test")
-// .append('svg')
-// .attr('width', width + 'px')
-// .attr('height', height + 'px')
-//
-// // Get the data
-// d3.json('data.json').then(function(data) {
-//   svg.append('circle')
-//       .attr('cx',function(d) {
-//         console.log(d);
-//       })
-//       .attr('cy', 100)
-//       .attr('r', 10)
-//       .attr('width', 20)
-//       .attr('height', 20);
-//
-//         });
