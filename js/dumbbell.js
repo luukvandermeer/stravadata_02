@@ -50,7 +50,6 @@ xAxis = d3.axisBottom(xScale)
 .tickFormat(d3.timeFormat("%b"))
 .ticks(d3.timeMonth.every(1)); //adjust amount of ticks
 
-
 yAxis = d3.axisLeft(yScale)
 .tickFormat(d3.timeFormat("%I%p"))
 .ticks(d3.timeHour.every(12));
@@ -89,7 +88,10 @@ yAxisG.call(yAxis) //syntax to call xAxis
     })
     .attr('stroke', '#FFF')
     .on('mouseover', function(d){
-      console.log(d.start_date_local+d.moving_time);
+      console.log(d.start_date_local);
+      console.log(d.start_date_local+1);
+      console.log(d3.timeHour.offset((d3.timeFormat("%Y,%m,%d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))), 1));
+
     });
 
 //CIRCLES
@@ -104,7 +106,7 @@ yAxisG.call(yAxis) //syntax to call xAxis
     return yScale(new Date("2020-01-01 "+(d3.timeFormat("%H:%M:%S")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))))) // uses fixed date and variable HH:MM:SS for yScale
       // return d.elapsed_time / 1000;
     })
-    .attr('r', 2)
+    .attr('r', 1.75)
     .attr('width', 20)
     .attr('height', 20)
     .style('fill', '#55546E');
@@ -119,7 +121,7 @@ yAxisG.call(yAxis) //syntax to call xAxis
     .attr('cy', function(d) {
       return yScale(new Date("2020-01-01 "+(d3.timeFormat("%H:%M:%S")(parseFloat(d3.timeFormat("%Q")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))+d.moving_time*1000)))); //calculate d.start_date_local to UNIC EPOCH, add movingtime (milli) seconds, uses fixed date and variable HH:MM:SS for yScale
     })
-    .attr('r', 2)
+    .attr('r', 1.75)
     .attr('width', 20)
     .attr('height', 20)
     .style('fill', '#55546E')

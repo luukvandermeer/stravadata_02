@@ -28,7 +28,10 @@ V Try to link d.start_date_local to Y position of circle to testout concept
 V Fix X axis (months)
 V Fix Y axis (times)
 V Chart dots begin and end event
-- Fix lines and dots for event which take longer then one DAY
+> Fix lines and dots for event which take longer then one DAY
+      if time of the day (including moving_time)> is bigger then 24:00:00 then +1 day.
+      https://stackoverflow.com/questions/18796291/d3-get-current-time-and-subtract-by-2-hours/18796598
+      
 - Animation chart
 - Animation numbers -> https://observablehq.com/@d3/transition-texttween
 

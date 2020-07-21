@@ -26,16 +26,15 @@ d3.json('data.json').then(function(data) {
   .domain([0,150])
   .range([0,150]);
 
-
 //ADD AXIS
 barcharts.selectAll('rect')
 .data(data)
 .enter()
 .append('rect')
 .attr('x', 12)
- .attr('y', function(d) { return yScale(d.type); })
- .attr('width', function(d) { return xScale(d.moving_time); })
- .attr('height', 5)
+.attr('y', function(d, i) {return yScale(d.type); })
+.attr('width', function(d) { return xScale(d.moving_time); })
+.attr('height', 5)
  .attr('fill', '#69b3a2')
  .on('mouseover', function(d){
    console.log(d.type);
