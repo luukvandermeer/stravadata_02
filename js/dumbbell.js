@@ -68,6 +68,8 @@ xAxisG.call(xAxis) //syntax to call xAxis
 yAxisG.call(yAxis) //syntax to call xAxis
 .attr('transform', 'translate(48,0)');
 
+
+
 //LINES
   lines = svg.selectAll('.line')
     .data(data)
@@ -91,7 +93,6 @@ yAxisG.call(yAxis) //syntax to call xAxis
       console.log(d.start_date_local);
       console.log(d.start_date_local+1);
       console.log(d3.timeHour.offset((d3.timeFormat("%Y,%m,%d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))), 1));
-
     });
 
 //CIRCLES
@@ -109,7 +110,12 @@ yAxisG.call(yAxis) //syntax to call xAxis
     .attr('r', 1.75)
     .attr('width', 20)
     .attr('height', 20)
-    .style('fill', '#55546E');
+    .style('fill', '#55546E')
+    .on('mouseover', function(d){
+      });
+
+      // if ((d3.timeFormat("%H:%M:%S")(parseFloat(d3.timeFormat("%Q")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))+d.moving_time*1000)) >= "23:59:59")
+      // {return console.log("yes")}});
 
   circlesX2 = svg.selectAll('.circle')
     .data(data)
@@ -133,9 +139,9 @@ yAxisG.call(yAxis) //syntax to call xAxis
     console.log(d3.timeFormat("%H:%M:%S")(parseFloat(d3.timeFormat("%Q")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")("2020-07-24T23:38:40Z")))+1994000));
     console.log(parseFloat(d3.timeFormat("%Q")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")("2020-02-15T01:24:32Z")))+1);
     console.log((d3.timeFormat("%Q")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")("2020-02-15T01:24:32Z")))+1);
-    // (d3.timeFormat("%H:%M:%S")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")((d3.timeFormat("%Q")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")("2020-02-15T01:24:32Z")))+(d.elapsed_time*1000))))
 
-    console.log;
+
+
     console.log(d3.timeFormat("%s")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")("2020-02-15T01:24:32Z")));
     console.log(d3.timeFormat("%H:%M:%S")(1581726272000));
 

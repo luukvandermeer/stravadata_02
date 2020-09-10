@@ -16,8 +16,13 @@ d3.json('data.json').then(function(data) {
   var tuffestDayDetails = d3.max(data, function(d) {if (d.suffer_score >= (d3.max(data, d => d.suffer_score))) {return [(d3.format(",.1f")((d.distance / 1000))) + "km", d.total_elevation_gain + "m", (d3.format(",.1f")(d.moving_time / 3600)) + "h", d.suffer_score + "pt"]}}) //determine tuffestscore and get details
   var farthestDistance = d3.max(data, function(d) {if (d.distance >= (d3.max(data, d => d.distance))) {return (d.distance)}})
   var farthestDistanceDetails = d3.max(data, function(d) {if (d.distance >= (d3.max(data, d => d.distance))) {return [(d3.timeFormat("%B %d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))), (d3.format(",.1f")(d.moving_time / 3600)) + "h"]}}) //determine farthestDistance and get details
-  // var shortestDistance = d3.min(data, function (d) {if (d.distance>0.1){return d.distance}})
-  // console.log(shortestDistance);
+
+
+  var shortestDistance = d3.min(data, function(d) {if (d.distance > 0.1){return d.distance}})
+  // var shortestDistanceDetails = d3.min(data, function (d) {if (d.distance >= (d3.min(data,  d => (d.distance>0.1))) {return [(d3.timeFormat("%B %d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))), (d3.format(",.1f")(d.moving_time / 3600)) + "h"]}}) //determine farthestDistance and get details
+console.log(shortestDistance);
+
+
   var climbing = d3.sum(data, function(d) {return d.total_elevation_gain})
   var climbingDetails = climbing / 8848 //8848m = mountEverest
   var calories = d3.sum(data, function(d) {return d.kilojoules / 0.239})
@@ -38,8 +43,8 @@ d3.json('data.json').then(function(data) {
   d3.select(".tuffestDayDetails").text((tuffestDayDetails.join(' | ')))
   d3.select(".farthestDistance").text((d3.format(",.0f")((farthestDistance))))
   d3.select(".farthestDistanceDetails").text((farthestDistanceDetails.join(' | ')))
-  // d3.select(".shortestDistance").text((d3.format(",.0f")((shortestDistance))))
-  // d3.select(".shortestDistanceDetails").text((shortestDistanceDetails.join(' | ')))
+  d3.select(".shortestDistance").text((d3.format(",.0f")((shortestDistance))))
+  d3.select(".shortestDistanceDetails").text((shortestDistanceDetails.join(' | ')))
   d3.select(".climbing").text(d3.format(",.0f")(climbing) + "m")
   d3.select(".climbingDetails").text(d3.format(".1f")(climbingDetails) + "x")
   d3.select(".calories").text(d3.format(",.0f")(calories))

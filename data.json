@@ -65,11 +65,11 @@
       "resource_state": 1
     },
     "name": "Nachtrit",
-    "distance": 0,
+    "distance": -5,
     "moving_time": 2120,
     "elapsed_time": 2120,
     "total_elevation_gain": 0,
-    "type": "Ride",
+    "type": "Rie",
     "workout_type": null,
     "id": 3126907542,
     "external_id": "garmin_push_4584353359",
