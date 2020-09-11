@@ -20,8 +20,9 @@ V CALCULATION TUFFEST DAY make easier
 - timeformat Seconds to HH:MM:SS
 V Farthest distance
 V Climbing + Calories BURNED
+V Shortest distance
+V Realdeal VS Virtual
 
-> shortest distance
 
 DUMBBELL.JS
 V Try to link d.start_date_local to Y position of circle to testout concept
@@ -29,6 +30,8 @@ V Fix X axis (months)
 V Fix Y axis (times)
 V Chart dots begin and end event
 > Fix lines and dots for event which take longer then one DAY
+  Potential solution: Create two different dummbells. If day and movingtime are > 23:59:59, use two differetn line components.
+
       if time of the day (including moving_time)> is bigger then 24:00:00 then +1 day.
       https://stackoverflow.com/questions/18796291/d3-get-current-time-and-subtract-by-2-hours/18796598
 
@@ -36,6 +39,7 @@ V Chart dots begin and end event
 - Animation numbers -> https://observablehq.com/@d3/transition-texttween
 
 BARS.JS
+- Create Array of data
 - https://observablehq.com/@andrew1johnston/horizontal-bar-chart-a-la-feltron-annual-report-2013
 
 AREA.JS
@@ -64,9 +68,9 @@ CSS
 
 <!-- CSS -->
   <link href="/css/main.css" rel="stylesheet">
-  <!-- Favicon -->
-<link rel="shortcut icon" type="image/png" href="image/LvdM-06.png">
-  <!-- JS -->
+<!-- Favicon -->
+  <link rel="shortcut icon" type="image/png" href="image/LvdM-06.png">
+<!-- JS -->
   <script type="text/javascript" src="/js/d3.min.js"></script>
   <script type="text/javascript" src="/js/d3-array.min.js"></script>
   <script type="text/javascript" src="/js/metrics.js"></script>
@@ -184,7 +188,12 @@ CSS
         <hr class="breakLine">
       </div>
       <div class="metric">Test 1</div>
-      <div class="metric">Test 1</div>
+      <div class="metric">
+        <h4>RIDES REALDEAL/VIRTUAL</h4>
+        <h6><span class="workoutsRealdeal" id="valuesLight"></span><span id="valuesLight">/</span><span class="workoutsVirtual" id="valuesLight"></span></h6>
+        <h5>Virtual rides were <span class="workoutsHoursChangeVirtual" id="valuesFooter"></span><span class="workoutsRealdealVirtual" id="valuesFooter"></span>in time</h5>
+        <hr class="breakLine">
+      </div>
       <div class="metric">Test 2</div>
       <div class="metric">
         <h4>TOTAL CLIMBING</h4>

@@ -16,7 +16,7 @@
     "external_id": "garmin_push_4588107008",
     "upload_id": 3343454033,
     "start_date": "2020-02-24T22:38:40Z",
-    "start_date_local": "2020-07-24T23:38:40Z",
+    "start_date_local": "2020-12-24T23:38:40Z",
     "timezone": "(GMT+01:00) Europe/Amsterdam",
     "utc_offset": 3600,
     "start_latlng": null,
@@ -431,7 +431,7 @@
       "resource_state": 1
     },
     "name": "Wattbike Haute Route 7 - day 13",
-    "distance": 27548.9,
+    "distance": -8,
     "moving_time": 3234,
     "elapsed_time": 3234,
     "total_elevation_gain": 0,
