@@ -23,13 +23,29 @@ d3.json('data.json').then(function(data) {
   var workoutsHoursRealDealMean = d3.mean(data, function(d) {if (d.type || "VirtualRide") {return d.elapsed_time / 3600}}) //devide to translate to hours
   var workoutsHoursVirtualMean = d3.mean(data, function(d) {if (d.type == "VirtualRide") {return d.elapsed_time / 3600}}) //devide to translate to hours
   var workoutsRealdealVirtual;if (((workoutsHoursVirtualMean - workoutsHoursRealDealMean) / workoutsHoursRealDealMean) >= 0) {workoutsRealdealVirtual = "longer";} else {workoutsRealdealVirtual = "shorter"} //if statement for shorter or longer rides Realdeal vs Virtual
-
-
-
   var climbing = d3.sum(data, function(d) {return d.total_elevation_gain})
   var climbingDetails = climbing / 8848 //8848m = mountEverest
   var calories = d3.sum(data, function(d) {return d.kilojoules / 0.239})
   var caloriesDetails = calories / 280 //280cl is applePie
+
+  var arrayActiveMonth = d3.nest()
+      .key(function(d) {return (d3.timeFormat("%B")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))})
+      // .sortKeys(d3.ascending)
+      .rollup(function (v) {return {
+        moving: d3.sum(v, function(d) {return d.moving_time;}),
+        distance: d3.sum(v, function(d) {return d.distance;}),
+        elevation: d3.sum(v, function(d) {return d.total_elevation_gain;})
+      }})
+      .entries(data);
+
+
+var mostActiveMonth = d3.max(arrayActiveMonth, function(d) {return d.key})
+console.log(arrayActiveMonth);
+
+// var mostActiveMonthDetails = d3.sum(data, function(d) {if ((d3.timeFormat("%B")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))) == mostActiveMonth) {return d.distance}})
+ //determine tuffestscore and get details
+var leastActiveMonth = d3.min(arrayActiveMonth, function(d) {return d.key})
+
 
   //Add variables to span
   // d3.select(".workoutsCount").text((workoutsCount))
