@@ -31,20 +31,23 @@ d3.json('data.json').then(function(data) {
   var arrayActiveMonth = d3.nest()
       .key(function(d) {return (d3.timeFormat("%B")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))})
       // .sortKeys(d3.ascending)
-      .rollup(function (v) {return {
-        moving: d3.sum(v, function(d) {return d.moving_time;}),
-        distance: d3.sum(v, function(d) {return d.distance;}),
-        elevation: d3.sum(v, function(d) {return d.total_elevation_gain;})
+      .rollup(function (values) {return {
+        movingtime: d3.sum(values, function(d) {return d.moving_time;}),
+        distance: d3.sum(values, function(d) {return d.distance;}),
+        elevation: d3.sum(values, function(d) {return d.total_elevation_gain;})
       }})
       .entries(data);
 
-
-var mostActiveMonth = d3.max(arrayActiveMonth, function(d) {return d.key})
 console.log(arrayActiveMonth);
 
-// var mostActiveMonthDetails = d3.sum(data, function(d) {if ((d3.timeFormat("%B")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))) == mostActiveMonth) {return d.distance}})
- //determine tuffestscore and get details
-var leastActiveMonth = d3.min(arrayActiveMonth, function(d) {return d.key})
+// var max = d3.max(arrayActiveMonth, function (d) {return +d.movingtime;});
+
+
+
+var leastActiveMonth = d3.min(d3.values(arrayActiveMonth), function(d) {return d.movingtime})
+
+console.log(leastActiveMonth);
+
 
 
   //Add variables to span
