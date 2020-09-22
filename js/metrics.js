@@ -28,6 +28,8 @@ d3.json('data.json').then(function(data) {
   var calories = d3.sum(data, function(d) {return d.kilojoules / 0.239})
   var caloriesDetails = calories / 280 //280cl is applePie
 
+//ROLLUPPS
+
   var arrayActiveMonth = d3.nest()
       .key(function(d) {return (d3.timeFormat("%B")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))})
       // .sortKeys(d3.ascending)
@@ -42,11 +44,26 @@ console.log(arrayActiveMonth);
 
 // var max = d3.max(arrayActiveMonth, function (d) {return +d.movingtime;});
 
-
-
 var leastActiveMonth = d3.min(d3.values(arrayActiveMonth), function(d) {return d.movingtime})
 
 console.log(leastActiveMonth);
+
+var workoutsPerWeek = d3.nest()
+    .key(function(d) {return (d3.timeFormat("%a")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))})
+    // .sortKeys(d3.ascending)
+    .rollup(function (values) {return {
+      count: d3.count(values, function(d) {return d.id;}),
+    }})
+    .entries(data);
+
+var sufferscorePerMonth = d3.nest()
+    .key(function(d) {return (d3.timeFormat("%b")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))})
+        // .sortKeys(d3.ascending)
+    .rollup(function (values) {return {
+        suffer_score: d3.sum(values, function(d) {return d.suffer_score;}),
+    }})
+    .entries(data);
+
 
 
 
