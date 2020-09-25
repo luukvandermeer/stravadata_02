@@ -190,6 +190,18 @@ area {
   color: #55546E;
 }
 
+#valuesDarkMedium{
+  /* margin: 0px 3px 0px 3px; */
+  color: #55546E;
+  font-size: 100px;
+}
+
+#valuesDarkSmall{
+  color: #55546E;
+  font-size: 80px;
+  /* margin: -50em  0 -250em 0; */
+}
+
 #valuesLight{
   /* margin: 0px 3px 0px 3px; */
     color: #fff;‘’
