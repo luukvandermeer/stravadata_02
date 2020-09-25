@@ -1,7 +1,7 @@
 //VARIABLES & METRICS
 d3.json('data.json').then(function(data) {
   // variables calculations
-  var workoutsCount = d3.count(data, d => d.id);
+  const workoutsCount = d3.count(data, d => d.id);
   var workoutsCountWeek = workoutsCount / 52; //devide to count week per year
   var workoutsHours = d3.sum(data, function(d) {return d.elapsed_time / 3600}) //devide to translate to hours
   var workoutsTogether = d3.count(data, d => {if (d.athlete_count >= 2) {return d.id}})
@@ -39,10 +39,16 @@ d3.json('data.json').then(function(data) {
         elevation: d3.sum(values, function(d) {return d.total_elevation_gain;})
       }})
       .entries(data);
-
-console.log(arrayActiveMonth);
-
+// 
+// console.log(arrayActiveMonth);
+//
 // var max = d3.max(arrayActiveMonth, function (d) {return +d.movingtime;});
+//
+
+
+console.log(arrayActiveMonth.movingtime);
+
+console.log(data);
 
 var leastActiveMonth = d3.min(d3.values(arrayActiveMonth), function(d) {return d.movingtime})
 

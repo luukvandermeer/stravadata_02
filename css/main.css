@@ -185,21 +185,26 @@ area {
 
 
 /* VALUES */
-#valuesDark{
+valuesDark{
   /* margin: 0px 3px 0px 3px; */
   color: #55546E;
 }
 
-#valuesDarkMedium{
+valuesDarkMedium{
   /* margin: 0px 3px 0px 3px; */
   color: #55546E;
   font-size: 100px;
 }
 
-#valuesDarkSmall{
-  color: #55546E;
+valuesDarkSmall{
+  color: #fff;
   font-size: 80px;
-  /* margin: -50em  0 -250em 0; */
+  /* margin:0px; */
+  /* margin-top: -50px;
+  margin-bottom: -50px;
+  margin-left: auto;
+  margin-right: auto; */
+  margin: -50px  0 -50px 0;
 }
 
 #valuesLight{
