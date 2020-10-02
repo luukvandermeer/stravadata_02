@@ -39,20 +39,17 @@ d3.json('data.json').then(function(data) {
         elevation: d3.sum(values, function(d) {return d.total_elevation_gain;})
       }})
       .entries(data);
-// 
-// console.log(arrayActiveMonth);
-//
-// var max = d3.max(arrayActiveMonth, function (d) {return +d.movingtime;});
-//
+
+var max = d3.max(arrayActiveMonth, function (d) {if (d.value.distance >= (d3.max(arrayActiveMonth, d => d.value.distance))) {return (d.key)}});
+console.log(max);
 
 
-console.log(arrayActiveMonth.movingtime);
 
-console.log(data);
 
 var leastActiveMonth = d3.min(d3.values(arrayActiveMonth), function(d) {return d.movingtime})
 
 console.log(leastActiveMonth);
+
 
 var workoutsPerWeek = d3.nest()
     .key(function(d) {return (d3.timeFormat("%a")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))})
