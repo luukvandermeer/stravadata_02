@@ -29,26 +29,25 @@ d3.json('data.json').then(function(data) {
   var caloriesDetails = calories / 280 //280cl is applePie
 
 //ROLLUPPS
-
   var arrayActiveMonth = d3.nest()
-      .key(function(d) {return (d3.timeFormat("%B")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))})
+      .key(function(d) {return (d3.timeFormat("%b")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))})
       // .sortKeys(d3.ascending)
       .rollup(function (values) {return {
-        movingtime: d3.sum(values, function(d) {return d.moving_time;}),
+        moving_time: d3.sum(values, function(d) {return d.moving_time;}),
         distance: d3.sum(values, function(d) {return d.distance;}),
-        elevation: d3.sum(values, function(d) {return d.total_elevation_gain;})
+        total_elevation_gain: d3.sum(values, function(d) {return d.total_elevation_gain;})
       }})
       .entries(data);
 
-var max = d3.max(arrayActiveMonth, function (d) {if (d.value.distance >= (d3.max(arrayActiveMonth, d => d.value.distance))) {return (d.key)}});
-console.log(max);
+console.log(arrayActiveMonth);
+var mostActiveMonth = d3.max(arrayActiveMonth, function (d) {if (d.value.moving_time >= (d3.max(arrayActiveMonth, d => d.value.moving_time))) {return (d.key)}});
+var mostActiveMonthDetails = d3.max(arrayActiveMonth, function(d) {if (d.value.moving_time >= (d3.max(arrayActiveMonth, d => d.value.moving_time))) {return [(d3.format(",.1f")((d.value.distance / 1000))) + "km", (d3.format(",.1f")(d.value.total_elevation_gain)) + "m", (d3.format(",.1f")(d.value.moving_time / 3600)) + "h"]}}) //determine farthestDistance and get details
 
 
+// var leastActiveMonth = d3.min(d3.values(arrayActiveMonth), function(d) {return d.movingtime})
 
-
-var leastActiveMonth = d3.min(d3.values(arrayActiveMonth), function(d) {return d.movingtime})
-
-console.log(leastActiveMonth);
+var leastActiveMonth = d3.min(arrayActiveMonth, function (d) {if (d.value.moving_time <= (d3.min(arrayActiveMonth, d => d.value.moving_time))) {return (d.key)}});
+var leastActiveMonthDetails = d3.min(arrayActiveMonth, function(d) {if (d.value.moving_time <= (d3.min(arrayActiveMonth, d => d.value.moving_time))) {return [(d3.format(",.1f")((d.value.distance / 1000))) + "km", (d3.format(",.1f")(d.value.total_elevation_gain)) + "m", (d3.format(",.1f")(d.value.moving_time / 3600)) + "h"]}}) //determine farthestDistance and get details
 
 
 var workoutsPerWeek = d3.nest()
@@ -87,6 +86,12 @@ var sufferscorePerMonth = d3.nest()
   d3.select(".farthestDistanceDetails").text((farthestDistanceDetails.join(' | ')))
   d3.select(".shortestDistance").text((d3.format(",.0f")((shortestDistance))))
   d3.select(".shortestDistanceDetails").text((shortestDistanceDetails.join(' | ')))
+  d3.select(".mostActiveMonth").text(mostActiveMonth)
+  d3.select(".mostActiveMonthDetails").text((mostActiveMonthDetails.join(' | ')))
+  d3.select(".leastActiveMonth").text(leastActiveMonth)
+  d3.select(".leastActiveMonthDetails").text((leastActiveMonthDetails.join(' | ')))
+
+
 
   d3.select(".workoutsRealdeal").text((workoutsCount - workoutsVirtual))
   d3.select(".workoutsVirtual").text(workoutsVirtual)
