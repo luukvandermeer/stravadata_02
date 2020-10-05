@@ -1,3 +1,24 @@
+// var workoutsPerWeek = d3.nest()
+//     .key(function(d) {return (d3.timeFormat("%a")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))})
+//     // .sortKeys(d3.ascending)
+//     .rollup(function (values) {return {
+//       count: d3.count(values, function(d) {return d.id;}),
+//     }})
+//     .entries(data);
+//
+// console.log(workoutsPerWeek);
+//
+// var sufferscorePerMonth = d3.nest()
+//     .key(function(d) {return (d3.timeFormat("%b")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))})
+//         // .sortKeys(d3.ascending)
+//     .rollup(function (values) {return {
+//         suffer_score: d3.sum(values, function(d) {return d.suffer_score;}),
+//     }})
+//     .entries(data);
+//
+
+
+
 
 var margin = {top: 2, right: 2, bottom: 2, left: 2},
     width = 200 - margin.left - margin.right,

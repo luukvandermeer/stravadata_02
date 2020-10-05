@@ -39,36 +39,31 @@ d3.json('data.json').then(function(data) {
       }})
       .entries(data);
 
-console.log(arrayActiveMonth);
 var mostActiveMonth = d3.max(arrayActiveMonth, function (d) {if (d.value.moving_time >= (d3.max(arrayActiveMonth, d => d.value.moving_time))) {return (d.key)}});
-var mostActiveMonthDetails = d3.max(arrayActiveMonth, function(d) {if (d.value.moving_time >= (d3.max(arrayActiveMonth, d => d.value.moving_time))) {return [(d3.format(",.1f")((d.value.distance / 1000))) + "km", (d3.format(",.1f")(d.value.total_elevation_gain)) + "m", (d3.format(",.1f")(d.value.moving_time / 3600)) + "h"]}}) //determine farthestDistance and get details
-
-
-// var leastActiveMonth = d3.min(d3.values(arrayActiveMonth), function(d) {return d.movingtime})
-
+var mostActiveMonthDetails = d3.max(arrayActiveMonth, function(d) {if (d.value.moving_time >= (d3.max(arrayActiveMonth, d => d.value.moving_time))) {return [(d3.format(",.1f")((d.value.distance / 1000))) + "km", (d3.format(",.1f")(d.value.total_elevation_gain)) + "m", (d3.format(",.1f")(d.value.moving_time / 3600)) + "h"]}})
 var leastActiveMonth = d3.min(arrayActiveMonth, function (d) {if (d.value.moving_time <= (d3.min(arrayActiveMonth, d => d.value.moving_time))) {return (d.key)}});
-var leastActiveMonthDetails = d3.min(arrayActiveMonth, function(d) {if (d.value.moving_time <= (d3.min(arrayActiveMonth, d => d.value.moving_time))) {return [(d3.format(",.1f")((d.value.distance / 1000))) + "km", (d3.format(",.1f")(d.value.total_elevation_gain)) + "m", (d3.format(",.1f")(d.value.moving_time / 3600)) + "h"]}}) //determine farthestDistance and get details
+var leastActiveMonthDetails = d3.min(arrayActiveMonth, function(d) {if (d.value.moving_time <= (d3.min(arrayActiveMonth, d => d.value.moving_time))) {return [(d3.format(",.1f")((d.value.distance / 1000))) + "km", (d3.format(",.1f")(d.value.total_elevation_gain)) + "m", (d3.format(",.1f")(d.value.moving_time / 3600)) + "h"]}})
 
+var arrayActiveTimeOfDay = d3.nest()
+  .key(function (d) {return(d3.timeFormat("%H")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))})
+  // .sortKeys(d3.ascending)
+  .rollup(function (values) {return {
+    moving_time: d3.sum(values, function(d) {return d.moving_time;}),
+    distance: d3.sum(values, function(d) {return d.distance;}),
 
-var workoutsPerWeek = d3.nest()
-    .key(function(d) {return (d3.timeFormat("%a")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))})
-    // .sortKeys(d3.ascending)
-    .rollup(function (values) {return {
-      count: d3.count(values, function(d) {return d.id;}),
-    }})
-    .entries(data);
+    total_elevation_gain: d3.sum(values, function(d) {return d.total_elevation_gain;}),
+    workouts: d3.count(values, d => d.id)
+  }})
+  .entries(data);
 
-var sufferscorePerMonth = d3.nest()
-    .key(function(d) {return (d3.timeFormat("%b")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))})
-        // .sortKeys(d3.ascending)
-    .rollup(function (values) {return {
-        suffer_score: d3.sum(values, function(d) {return d.suffer_score;}),
-    }})
-    .entries(data);
-
+var activeTimeOfDay = d3.max(arrayActiveTimeOfDay, function (d) {if (d.value.moving_time >= (d3.max(arrayActiveTimeOfDay, d => d.value.moving_time))) {return (d.key)}});
+var activeTimeOfDayDetails = d3.max(arrayActiveTimeOfDay, function(d) {if (d.value.moving_time >= (d3.max(arrayActiveTimeOfDay, d => d.value.moving_time))) {return [d.value.workouts]}})
 
 
 
+var now = new Date;
+console.log(d3.timeSunday.count(d3.timeYear(now), now));
+console.log(now);
   //Add variables to span
   // d3.select(".workoutsCount").text((workoutsCount))
   d3.select(".workoutsCount").text(0).transition().delay(600).tween('text', tweenText(workoutsCount))
@@ -90,8 +85,8 @@ var sufferscorePerMonth = d3.nest()
   d3.select(".mostActiveMonthDetails").text((mostActiveMonthDetails.join(' | ')))
   d3.select(".leastActiveMonth").text(leastActiveMonth)
   d3.select(".leastActiveMonthDetails").text((leastActiveMonthDetails.join(' | ')))
-
-
+  d3.select(".activeTimeOfDay").text(activeTimeOfDay + ":00")
+  d3.select(".activeTimeOfDayDetails").text(activeTimeOfDayDetails)
 
   d3.select(".workoutsRealdeal").text((workoutsCount - workoutsVirtual))
   d3.select(".workoutsVirtual").text(workoutsVirtual)
