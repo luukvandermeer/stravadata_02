@@ -144,15 +144,14 @@ svg {
 }
 
 
-.barchart {
+.barsCountWorkouts {
   width: 200px;
-  height: 200px;
-  border: solid 1px #000;
-      background-color: #fff;
+      margin: 4px;
 }
 
-barchart {
-    background-color: #fff;
+.barsHoursWorkouts {
+  width: 200px;
+      margin: 4px;
 }
 
 .area {

@@ -1,70 +1,157 @@
-var margin = 0,
+{
+var margin = 4,
   width = 200,
-  height = 150
-  barcharts
-  // workoutTypeCount = d3.count(data, d => {if (d.type='ride') {return d.id}})
+  height = 125 - margin
 
-var barcharts = d3.select('.barchart')
-  .append('svg')
-  .attr('width', width + 'px')
-  .attr('height', height + 'px')
+
 
 d3.json('data.json').then(function(data) {
 
-  xMinMax = d3.extent(data, function(d) {
-  });
+  var barsCountWorkouts = d3.select('.barsCountWorkouts')
+    .append('svg')
+    .attr('width', width + 'px')
+    .attr('height', height + 'px')
 
-  yMinMax = d3.extent(data, function(d) {
-  });
+  var typeWorkouts = d3.nest()
+      .key(function(d) {return (d.type)})
+      .rollup(function (values) {return {
+        count: d3.count(values, function(d) {return d.id;}),
+      }})
+      .entries(data);
 
 //ADD SCALE
   xScale = d3.scaleLinear()
-      .domain([0,100])
-      .range([0,200]);
+      .domain([0,d3.max(typeWorkouts, d => d.value.count)])
+      .range([0,width]);
 
   yScale = d3.scaleBand()
-  .domain([0,150])
-  .range([0,150]);
+  .domain(typeWorkouts.map(d => d.key))
+  .range([0, 20 * typeWorkouts.length]);
 
-//ADD AXIS
-barcharts.selectAll('rect')
-.data(data)
+//ADD BARS
+barsCountWorkouts.selectAll('svg')
+.data(typeWorkouts)
 .enter()
 .append('rect')
-.attr('x', 12)
-.attr('y', function(d, i) {return yScale(d.type); })
-.attr('width', function(d) { return xScale(d.moving_time); })
-.attr('height', 5)
- .attr('fill', '#69b3a2')
+.attr('class', 'bar')
+.attr('x', function(d) {return (0)})
+.attr('y', d => (yScale(d.key))+20)
+.attr('width', d => width)
+.attr('height', 1)
+.attr('fill', '#ffffff')
+
+barsCountWorkouts.selectAll('svg')
+.data(typeWorkouts)
+.enter()
+.append('rect')
+.attr('class', 'bar')
+.attr('x', function(d) {return (0)})
+.attr('y', d => (yScale(d.key)+6))
+.attr('width', function(d) { return xScale(d.value.count); })
+.attr('height', 14)
+ .attr('fill', '#ffffff')
  .on('mouseover', function(d){
-   console.log(d.type);
+   console.log(d.key);
 });
 
-// barcharts.append('text')
-// .attr('class', 'label')
-// .attr('y', function (d) {
-//       return yScale();
-//   })
-//   //x position is 3 pixels to the right of the bar
-//   .attr('x', function (d) {
-//       return xScale(d.moving_time) + 3;
-//   })
-//   .text(function (d) {
-//       return d.moving_time;
-//   });
+//ADD TEXT
+barsCountWorkouts.selectAll('text')
+.data(typeWorkouts)
+.enter()
+.append('text')
+.attr('x', width - 0)
+.attr('y', function(d, i) {return (yScale(d.key))+20; })
+.text(d => (d.value.count))
+.attr("fill", '#55546E')
+.style("font", "13px pt mono")
+.style('font-weight', 'bold')
+.attr("text-anchor", "end");
 
-
-
-//     barcharts.selectAll('rect')
-//       .data(data)
-//       .enter()
-//       .append('rect')
-//       .attr('x', 12)
-//       .attr('y', 12)
-//       .attr('width', function(d,i) {return d.average_speed})
-//       .attr('height', 3)
-
-
-
-
+barsCountWorkouts.selectAll('text1')
+.data(typeWorkouts)
+.enter()
+.append('text')
+.attr('x', 0)
+.attr('y', function(d, i) {return (yScale(d.key))+20; })
+.text(d => (d.key))
+.attr("fill", '#55546E')
+.style("font", "13px pt sans")
+.attr("text-anchor", "start");
 });
+
+
+////////////////BARSWORKOUTHOURS///////////////////////
+d3.json('data.json').then(function(data) {
+
+  var barsHoursWorkouts = d3.select('.barsHoursWorkouts')
+    .append('svg')
+    .attr('width', width + 'px')
+    .attr('height', height + 'px')
+
+  var typeWorkouts = d3.nest()
+      .key(function(d) {return (d.type)})
+      .rollup(function (values) {return {
+        count: d3.count(values, function(d) {return d.id;}),
+      }})
+      .entries(data);
+
+//ADD SCALE
+  xScale = d3.scaleLinear()
+      .domain([0,d3.max(typeWorkouts, d => d.value.count)])
+      .range([0,width]);
+
+  yScale = d3.scaleBand()
+  .domain(typeWorkouts.map(d => d.key))
+  .range([0, 20 * typeWorkouts.length]);
+
+//ADD BARS
+barsHoursWorkouts.selectAll('svg')
+.data(typeWorkouts)
+.enter()
+.append('rect')
+.attr('class', 'bar')
+.attr('x', function(d) {return (0)})
+.attr('y', d => (yScale(d.key))+20)
+.attr('width', d => width)
+.attr('height', 1)
+.attr('fill', '#ffffff')
+
+barsHoursWorkouts.selectAll('svg')
+.data(typeWorkouts)
+.enter()
+.append('rect')
+.attr('class', 'bar')
+.attr('x', function(d) {return (0)})
+.attr('y', d => (yScale(d.key)+6))
+.attr('width', function(d) { return xScale(d.value.count); })
+.attr('height', 14)
+ .attr('fill', '#ffffff')
+ .on('mouseover', function(d){
+   console.log(d.key);
+});
+
+//ADD TEXT
+barsHoursWorkouts.selectAll('text')
+.data(typeWorkouts)
+.enter()
+.append('text')
+.attr('x', width - 0)
+.attr('y', function(d, i) {return (yScale(d.key))+20; })
+.text(d => (d.value.count))
+.attr("fill", '#55546E')
+.style("font", "13px pt mono")
+.style('font-weight', 'bold')
+.attr("text-anchor", "end");
+
+barsHoursWorkouts.selectAll('text1')
+.data(typeWorkouts)
+.enter()
+.append('text')
+.attr('x', 0)
+.attr('y', function(d, i) {return (yScale(d.key))+20; })
+.text(d => (d.key))
+.attr("fill", '#55546E')
+.style("font", "13px pt sans")
+.attr("text-anchor", "start");
+});
+}
