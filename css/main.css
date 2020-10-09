@@ -146,12 +146,17 @@ svg {
 
 .barsCountWorkouts {
   width: 200px;
-      margin: 4px;
+  margin: 4px;
 }
 
 .barsHoursWorkouts {
   width: 200px;
       margin: 4px;
+}
+
+.barsDistanceWorkouts {
+  width: 200px;
+  margin: 4px;
 }
 
 .area {
