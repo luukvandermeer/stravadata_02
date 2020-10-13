@@ -159,7 +159,12 @@ svg {
   margin: 4px;
 }
 
-.area {
+.areaWorkoutsPerWeek {
+  width: 200px;
+  margin: 4px;
+}
+
+/* .area {
   width: 200px;
   height: 200px;
   border: solid 1px #000;
@@ -168,7 +173,7 @@ svg {
 
 area {
     background-color: #55546E;
-}
+} */
 
 
 

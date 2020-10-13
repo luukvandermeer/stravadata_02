@@ -44,7 +44,7 @@ V Chart dots begin and end event
 
 BARS.JS
 V Create Array of data
-- https://observablehq.com/@andrew1johnston/horizontal-bar-chart-a-la-feltron-annual-report-2013
+ https://observablehq.com/@andrew1johnston/horizontal-bar-chart-a-la-feltron-annual-report-2013
 
 AREA.JS
 - https://observablehq.com/@barrerajulio/d3-area-multi-line-experiment
@@ -82,6 +82,7 @@ CSS
   <script type="text/javascript" src="/js/metrics.js"></script>
   <script type="text/javascript" src="/js/dumbbell.js"></script>
   <script type="text/javascript" src="/bars.js"></script>
+  <script type="text/javascript" src="/area.js"></script>
 
 
   <!-- Fonts -->
@@ -138,7 +139,6 @@ CSS
       <div class="metric">
       <h4>COUNT OF WORKOUTS</h4>
       <svg id="barsCountWorkouts" class="barsCountWorkouts">
-          <!-- <script type="text/javascript" src="/bars.js"></script> -->
   </svg>
         <hr class="breakLine">
       </div>
@@ -146,7 +146,6 @@ CSS
       <div class="metric">
         <h4>HOURS PER WORKOUT</h4>
         <svg id="barsHoursWorkouts" class="barsHoursWorkouts">
-            <!-- <script type="text/javascript" src="/bars.js"></script> -->
         </svg>
         <hr class="breakLine">
       </div>
@@ -154,7 +153,6 @@ CSS
       <div class="metric">
         <h4>DISTANCES PER WORKOUT</h4>
         <svg id="barsDistanceWorkouts" class="barsDistanceWorkouts">
-            <!-- <script type="text/javascript" src="/bars.js"></script> -->
         </svg>
         <hr class="breakLine">
       </div>
@@ -181,9 +179,9 @@ CSS
             <!-- <script src="https://d3js.org/d3.v4.js"></script> -->
             <!-- <script type="text/javascript" src="/area.js"></script> -->
         </div>
-
-
       </div>
+
+
       <div class="metric">
         <h4>FARTHEST DISTANCE</h4>
         <h6><span class="farthestDistance"></span></h6>
@@ -236,7 +234,9 @@ CSS
 
       <div class="metric">
         <h4>WORKOUTS PER WEEK</h4>
-            <hr class="breakLine">
+        <svg id="areaWorkoutsPerWeek" class="areaWorkoutsPerWeek">
+        </svg>
+        <hr class="breakLine">
       </div>
 
 
