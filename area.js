@@ -30,8 +30,14 @@ console.log(arrayWorkoutsPerWeek);
   .range([0, 20 * arrayWorkoutsPerWeek.length]);
 
 
+
+
+
+
+
+
 //ADD BARS
-barsCountWorkouts.selectAll('svg')
+areaWorkoutsPerWeek.selectAll('svg')
 .data(arrayWorkoutsPerWeek)
 .enter()
 .append('rect')
@@ -41,7 +47,7 @@ barsCountWorkouts.selectAll('svg')
 .attr('height', 1)
 .attr('fill', '#ffffff')
 
-barsCountWorkouts.selectAll('svg')
+areaWorkoutsPerWeek.selectAll('svg')
 .data(arrayWorkoutsPerWeek)
 .enter()
 .append('rect')
@@ -52,7 +58,7 @@ barsCountWorkouts.selectAll('svg')
 .attr('fill', '#ffffff');
 
 //ADD TEXT
-barsCountWorkouts.selectAll('text')
+areaWorkoutsPerWeek.selectAll('text')
 .data(arrayWorkoutsPerWeek)
 .enter()
 .append('text')
@@ -64,7 +70,7 @@ barsCountWorkouts.selectAll('text')
 .style('font-weight', 'bold')
 .attr("text-anchor", "end");
 
-barsCountWorkouts.selectAll('text1')
+areaWorkoutsPerWeek.selectAll('text1')
 .data(arrayWorkoutsPerWeek)
 .enter()
 .append('text')
@@ -75,61 +81,3 @@ barsCountWorkouts.selectAll('text1')
 .style("font", "13px pt sans")
 .attr("text-anchor", "start");
 });
-
-
-
-
-//
-// var margin = {top: 2, right: 2, bottom: 2, left: 2},
-//     width = 200 - margin.left - margin.right,
-//     height = 200 - margin.top - margin.bottom;
-//
-// // append the svg object to the body of the page
-// var area = d3.select(".area")
-//   .append("svg")
-//     .attr("width", width + margin.left + margin.right)
-//     .attr("height", height + margin.top + margin.bottom)
-//     .append("g")
-//     .attr("transform",
-//           "translate(" + margin.left + "," + margin.top + ")");
-//
-// //CHART
-//           d3.json('data.json').then(function(data) {
-//
-//             data = data.sort(function(a,b){ //sorting  d.start_date_local
-//               return a.start_date_local - b.start_date_local;
-//             });
-//
-//             activeYear = d3.min(data, function(d){ //determine year
-//               return d3.timeFormat("%Y")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local));
-//             });
-//
-//             xMinMax = d3.extent(data, function(d) {
-//               // return parseFloat(d3.timeFormat("%j")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))); //calculate first data and last day of excersize
-//             });
-//
-//             yMinMax = d3.extent(data, function(d) {
-//               // return parseFloat(d3.timeFormat("%s")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))); //calculate UNIX EPOCH
-//             });
-//
-//
-// //ADD SCALE
-//             xScale = d3.scaleTime()
-//                 .domain([new Date (activeYear,00,01), new Date(activeYear,11,31)]) //January = 00
-//                 .nice()
-//                 .range([48+2, 800-48]); //margin + radius circle
-//
-//             yScale = d3.scaleTime()
-//             .domain([new Date("2020-01-01 00:00:00"), new Date("2020-01-01 24:00:00")]) //creates 24h range
-//             .nice()
-//             .range([48,500-48-2]);
-//
-// //AREA
-// area = svg.selectAll('.line')
-//                 .data(data)
-//                 .enter()
-//                 .attr("d", d3.area()
-//                 .xScale(function(d) { return x(d.start_date_local) })
-//                   .yScale(function(d) { return y(d.distance) })
-//                   )
-//                   //
