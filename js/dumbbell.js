@@ -32,12 +32,12 @@ d3.json('data.json').then(function(data) {
 xScale = d3.scaleTime()
     .domain([new Date (activeYear,00,01), new Date(activeYear,11,31)]) //January = 00
     .nice()
-    .range([48+2, 800-48]); //margin + radius circle
+    .range([margin+2, width-margin]); //margin + radius circle
 
 yScale = d3.scaleTime()
 .domain([new Date("2020-01-01 00:00:00"), new Date("2020-01-01 24:00:00")]) //creates 24h range
 .nice()
-.range([48,500-48-2]);
+.range([margin,height-margin-2]);
 
 // Add a scale to the fill or stroke of the circles/lines
 // cScale = d3.scaleOrdinal()

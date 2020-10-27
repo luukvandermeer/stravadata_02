@@ -204,6 +204,8 @@ barsDistanceWorkouts.selectAll('svg')
 .attr('fill', '#ffffff');
 
 //ADD TEXT
+
+
 barsDistanceWorkouts.selectAll('text')
 .data(distanceWorkouts)
 .enter()
@@ -222,8 +224,23 @@ barsDistanceWorkouts.selectAll('text1')
 .append('text')
 .attr('x', 0)
 .attr('y', function(d, i) {return (yScale(d.key))+20; })
+// .text(0).transition().delay(600).tween('text', tweenText(d => (d.key)))
 .text(d => (d.key))
 .attr("fill", '#55546E')
 .style("font", "13px pt sans")
 .attr("text-anchor", "start");
+
+// Tween animation of numbers
+function tweenText(newValue) {
+  return function() {
+    // get current value as starting point for tween animation
+    var currentValue = +this.textContent;
+    // create interpolator and do not show nasty floating numbers
+    var i = d3.interpolateRound(currentValue, newValue);
+    return function(t) {
+      this.textContent = i(t);
+    };
+  }
+}
+
 });

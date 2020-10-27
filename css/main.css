@@ -122,6 +122,13 @@ header, main, footer {
   border: solid 1px #000;
 }
 
+
+#areaWorkoutsPerWeek{
+  width: 200px;
+  height: 100px;
+  /* border: solid 1px #000; */
+}
+
 svg {
   /* background-color: #fff; */
 }

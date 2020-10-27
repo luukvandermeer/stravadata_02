@@ -1,9 +1,10 @@
-
 d3.json('data.json').then(function(data) {
 
   var margin = 4,
     width = 200,
-    height = 125 - margin
+    height = 100,
+    textHeight = 20
+
 
     var areaWorkoutsPerWeek = d3.select("#areaWorkoutsPerWeek")
       .append('svg')
@@ -12,40 +13,68 @@ d3.json('data.json').then(function(data) {
 
   var arrayWorkoutsPerWeek = d3.nest()
       .key(function (d) {return(d3.timeFormat("%a")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))})
+
             // .key(function (d) {(d.start_date_local)})
       .rollup(function (values) {return {
         count: d3.count(values, function(d) {return d.id;}),
       }})
-      .entries(data);
+      .entries(data)
+      .sort();
 
-// console.log(arrayWorkoutsPerWeek);
+
+console.log(arrayWorkoutsPerWeek);
 
 //ADD SCALE
   yScale = d3.scaleLinear()
       .domain([0,d3.max(arrayWorkoutsPerWeek, d => d.value.count)])
-      .range([0,height]);
+      .range([0,height-textHeight]);
 
     xScale = d3.scaleBand()
-    .domain(arrayWorkoutsPerWeek.map(d => d.key))
+    // .domain(arrayWorkoutsPerWeek.map(d => d.key))
+        .domain(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat','Sun'])
     .range([0+margin, width]);
 
-  // Add the area
-  areaWorkoutsPerWeek.selectAll('svg1')
-    .data(arrayWorkoutsPerWeek)
+//ADD AXIS
+xAxis = d3.axisBottom(xScale)
+
+xAxisG = areaWorkoutsPerWeek.append('g') //group element xAxis
+.attr('id', 'xAxis')
+.attr('class', 'xAxis');
+
+xAxisG.call(xAxis) //syntax to call xAxis
+  .attr('transform', 'translate(-9,' + (height-textHeight) +')');
+
+// Add the area
+areaWorkoutsPerWeek.selectAll("svg")
+    .datum(arrayWorkoutsPerWeek)
     .enter()
     .append("path")
-    .attr("fill", "#ffffff")
-    .attr("stroke", "#ffffff")
-    .attr("stroke-width", 3.5)
-    .attr("d", d3.line()
-        .x(function(d) { return xScale(d.key) })
-        .y(function(d) { return yScale(d.value.count) })
-        )
-    // .attr("d", d3.area()
-    //   .x(function(d) { return xScale(d.key) })
-    //   .y0(yScale(0))
-    //   .y1(function(d) { return yScale(d.value.count) })
-    //   )
+    .attr('class', 'line1')
+    .attr("fill", "#000000")
+    .attr("stroke", "#000000")
+    .attr("stroke-width", 1.5)
+    .attr("d", function(d, i) { return d3.line()
+                .defined(d => d !== null)
+                .x((d) => xScale(d.key))
+                .y((d) => yScale(d.value.count));
+  });
+
+  //
+  areaWorkoutsPerWeek.selectAll("svg")
+        .data(arrayWorkoutsPerWeek)
+        .enter()
+        .append("path")
+        .attr('class', 'line2')
+        .attr("d", function (d, i) {
+          d3.line()
+          .x(function(d) { return xScale(d.key); })
+          .y(function(d) { return yScale(d.value.count); })
+        })
+        .attr("fill", "#000000")
+        .attr("stroke", "#000000")
+        .attr("stroke-width", 1.5)
+
+
 
     areaWorkoutsPerWeek.selectAll("svg")
    .data(arrayWorkoutsPerWeek)
@@ -57,51 +86,3 @@ d3.json('data.json').then(function(data) {
      .attr("cy", function(d) { return yScale(d.value.count) })
      .attr("r", 1.5)
 });
-
-
-//
-// //ADD BARS
-// areaWorkoutsPerWeek.selectAll('svg')
-// .data(arrayWorkoutsPerWeek)
-// .enter()
-// .append('rect')
-// .attr('x', function(d) {return (0)})
-// .attr('y', d => (yScale(d.key))+20)
-// .attr('width', d => width)
-// .attr('height', 1)
-// .attr('fill', '#ffffff')
-//
-// areaWorkoutsPerWeek.selectAll('svg')
-// .data(arrayWorkoutsPerWeek)
-// .enter()
-// .append('rect')
-// .attr('x', function(d) {return (0)})
-// .attr('y', d => (yScale(d.key)+6))
-// .attr('width', function(d) { return xScale(d.value.count); })
-// .attr('height', 14)
-// .attr('fill', '#ffffff');
-//
-// //ADD TEXT
-// areaWorkoutsPerWeek.selectAll('text')
-// .data(arrayWorkoutsPerWeek)
-// .enter()
-// .append('text')
-// .attr('x', width - 0)
-// .attr('y', function(d, i) {return (yScale(d.key))+20; })
-// .text(d => (d.value.count))
-// .attr("fill", '#55546E')
-// .style("font", "13px pt mono")
-// .style('font-weight', 'bold')
-// .attr("text-anchor", "end");
-//
-// areaWorkoutsPerWeek.selectAll('text1')
-// .data(arrayWorkoutsPerWeek)
-// .enter()
-// .append('text')
-// .attr('x', 0)
-// .attr('y', function(d, i) {return (yScale(d.key))+20; })
-// .text(d => (d.key))
-// .attr("fill", '#55546E')
-// .style("font", "13px pt sans")
-// .attr("text-anchor", "start");
-// });
