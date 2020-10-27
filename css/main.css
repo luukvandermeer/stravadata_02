@@ -141,6 +141,7 @@ svg {
   font-family: PT Mono;
   font-style: normal;
   text-transform: uppercase;
+  background-color: black;
 }
 
 .yAxis text {
