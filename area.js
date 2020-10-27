@@ -45,19 +45,30 @@ xAxisG.call(xAxis) //syntax to call xAxis
   .attr('transform', 'translate(-9,' + (height-textHeight) +')');
 
 // Add the area
-areaWorkoutsPerWeek.selectAll("svg")
-    .datum(arrayWorkoutsPerWeek)
-    .enter()
-    .append("path")
-    .attr('class', 'line1')
-    .attr("fill", "#000000")
-    .attr("stroke", "#000000")
-    .attr("stroke-width", 1.5)
-    .attr("d", function(d, i) { return d3.line()
-                .defined(d => d !== null)
-                .x((d) => xScale(d.key))
-                .y((d) => yScale(d.value.count));
-  });
+// areaWorkoutsPerWeek.selectAll("svg")
+//     .datum(arrayWorkoutsPerWeek)
+//     .enter()
+//     .append("path")
+//     .attr('class', 'line1')
+//     .attr("fill", "#000000")
+//     .attr("stroke", "#000000")
+//     .attr("stroke-width", 1.5)
+//     .attr("d", function(d, i) { return d3.line()
+//                 .defined(d => d !== null)
+//                 .x((d) => xScale(d.key))
+//                 .y((d) => yScale(d.value.count));
+//   });
+areaWorkoutsPerWeek
+       .datum(arrayWorkoutsPerWeek)
+       .append("path")
+       .attr('class', 'my-second-awesome-line-class')
+       .attr("d", d3.line()
+           .x(function(d) { return xScale(d.key); })
+           .y(function(d) { return yScale(d.value.count); })
+       )
+       .attr("fill", "none")
+       .attr("stroke", "#000000")
+       .attr("stroke-width", 1.5)
 
   //
   areaWorkoutsPerWeek.selectAll("svg")
