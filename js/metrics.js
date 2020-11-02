@@ -66,6 +66,7 @@ console.log(d3.timeSunday.count(d3.timeYear(now), now));
 console.log(now);
   //Add variables to span
   // d3.select(".workoutsCount").text((workoutsCount))
+  d3.select(".activeYear").text(d3.timeFormat("%Y")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(tuffestDay)))
   d3.select(".workoutsCount").text(0).transition().delay(600).tween('text', tweenText(workoutsCount))
   d3.select(".workoutsCountWeek").text(d3.format(",.1f")(workoutsCountWeek))
   d3.select(".workoutsHoursTotal").text(d3.format(",.1f")(workoutsHours))

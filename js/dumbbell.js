@@ -28,6 +28,7 @@ d3.json('data.json').then(function(data) {
     // return parseFloat(d3.timeFormat("%s")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))); //calculate UNIX EPOCH
   });
 
+
 //ADD SCALE
 xScale = d3.scaleTime()
     .domain([new Date (activeYear,00,01), new Date(activeYear,11,31)]) //January = 00
@@ -44,8 +45,14 @@ yScale = d3.scaleTime()
 // .domain([0,1])
 // .range(['#333', '#ff6600'])
 
+// gridlines in x axis function
+function make_x_gridlines() {
+    return d3.axisBottom(xScale)
+        .ticks(12)
+
+}
+
 //ADD AXIS
-// xAxis = d3.axisBottom(xScale).tickValues([40,200,300]);
 xAxis = d3.axisBottom(xScale)
 .tickFormat(d3.timeFormat("%b"))
 .ticks(d3.timeMonth.every(1)); //adjust amount of ticks
@@ -63,12 +70,24 @@ yAxisG = svg.append('g') //group element yAxis
 .attr('class', 'yAxis');
 
 xAxisG.call(xAxis) //syntax to call xAxis
-  .attr('transform', 'translate(0,' + (500-48) +')');
+  .attr('transform', 'translate(0,' + (500-30) +')')
+  .selectAll("text")
+    .attr("y", 6)
+    .attr("x", 15)
+    .style("text-anchor", "start");
 
 yAxisG.call(yAxis) //syntax to call xAxis
 .attr('transform', 'translate(48,0)');
 
-
+svg.append("g")
+    .attr("class", "grid")
+    .attr("transform", "translate(0," + height + ")")
+    .call(make_x_gridlines()
+        .tickSize(-(height-margin))
+        .tickFormat(""))
+    .call(g => g.selectAll(".tick:not(:first-of-type) line")
+    .attr("stroke-opacity", 0.1)
+    .attr("stroke-dasharray", "2,2"))
 
 //LINES
   lines = svg.selectAll('.line')

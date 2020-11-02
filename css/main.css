@@ -52,12 +52,13 @@ h5 {
 h6 {
   font-family: FilmotypeGiant;
   font-weight: 300;
-  font-size: 150px;
-  line-height: 100%;
+  /* font-size: 150px;   */
+  /* line-height: 100%; */
   letter-spacing: -0.02em;
   color: #55546E;
-  margin: 0px 0px -20px 0px;
+  margin: 0px 0px -15px 0px;
   }
+
 
 body {
   background-color: #55546E;
@@ -65,8 +66,8 @@ body {
 }
 
 .breakLine {
-  border: .1px dashed #55546E;
-  /* border-color:  */
+  border: 1px dotted #A99D5A; */
+
 }
 
 #container {
@@ -83,7 +84,12 @@ body {
   max-width: 800px;
   margin: auto;
   padding: 0px 51px 0px 51px;
+  grid-auto-flow: row;
 }
+
+
+
+
 
 header {
   grid-row: header;
@@ -98,37 +104,52 @@ section {
 }
 
 main {
-  grid-row: content;
+  /* grid-row: content;
   grid-column: content;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: grid; */
+  /* display: flex;
+  flex-direction: column;
+  flex-wrap: wrap; */
+
+  /* grid-template-columns: repeat(4, 1fr);
   grid-gap: 5px;
-  height: auto;
+  height: auto; */
+
+  column-count: 4;
+  column-gap: 1em;
+  width: 800px;
 }
+
+
 
 footer {
   grid-row: footer;
   grid-column: footer;
 }
 
-header, main, footer {
+/* header, main, footer {
   border: 1px dashed;
-}
+} */
 
 /* CHART */
 .chart {
   width: 800px;
   height: 500px;
-  border: solid 1px #000;
+  /* border: solid 1px #000; */
 }
 
 
 #areaWorkoutsPerWeek{
-  width: 200px;
+  width: 185px;
   height: 100px;
   /* border: solid 1px #000; */
 }
 
+#areaSufferScorePerMonth{
+  width: 185px;
+  height: 100px;
+  /* border: solid 1px #000; */
+}
 svg {
   /* background-color: #fff; */
 }
@@ -141,7 +162,7 @@ svg {
   font-family: PT Mono;
   font-style: normal;
   text-transform: uppercase;
-  background-color: black;
+  /* background-color: black; */
 }
 
 .yAxis text {
@@ -154,16 +175,19 @@ svg {
 
 .barsCountWorkouts {
   width: 200px;
+height: 110px;
   margin: 4px;
 }
 
 .barsHoursWorkouts {
   width: 200px;
+  height: 110px;
       margin: 4px;
 }
 
 .barsDistanceWorkouts {
   width: 200px;
+  height: 110px;
   margin: 4px;
 }
 
@@ -172,61 +196,66 @@ svg {
   margin: 4px;
 }
 
-/* .area {
-  width: 200px;
-  height: 200px;
-  border: solid 1px #000;
-      background-color: #55546E;
-}
-
-area {
-    background-color: #55546E;
-} */
-
-
-
 /* METRICS */
-.metric {
-  /* background: lightcoral; */
+.metricBig {
   padding: 4px;
   height: auto;
-  /* border: 1px solid; */
+  width: 100%;
+  /* background-color: #eee; */
+  display: inline-block;
+  /* margin: 0 0 1em; */
+  width: 100%;
 }
-
-.metric1 {
-  background: #fff;
+.metricMedium {
   padding: 4px;
-  height: 200px;
-  border: 1px solid;
+  height: 100px;
+  width: 100%;
+  /* background-color: #eee; */
+display: inline-block;
+margin: 0 0 1em;
+width: 100%;
+}
+.metricSmall {
+  padding: 4px;
+  height: auto;
+  width: 100%;
+  /* background-color: #eee; */
+display: inline-block;
+/* margin: 0 0 1em; */
+width: 100%;
 }
 
 
 /* VALUES */
-valuesDark{
-  /* margin: 0px 3px 0px 3px; */
+#valuesDark{
+  margin: 0px 3px 0px 3px;
   color: #55546E;
+  font-size: 150px;
 }
 
-valuesDarkMedium{
-  /* margin: 0px 3px 0px 3px; */
+#valuesDarkMedium{
+  margin: 0px 3px 0px 3px;
   color: #55546E;
   font-size: 100px;
 }
 
-valuesDarkSmall{
-  color: #fff;
-  font-size: 80px;
-  /* margin:0px; */
-  /* margin-top: -50px;
-  margin-bottom: -50px;
-  margin-left: auto;
-  margin-right: auto; */
-  margin: -50px  0 -50px 0;
+#valuesDarkSmall{
+  margin: -35px  0px -35px 0px;
+  color: #55546E;
+  font-size: 70px;
+
 }
 
 #valuesLight{
-  /* margin: 0px 3px 0px 3px; */
-    color: #fff;‘’
+  margin: 0px 3px 0px 3px;
+  color: #fff;
+  font-size: 150px;
+}
+
+#valuesLightMedium{
+  margin: 0px 3px 0px 3px;
+  color: #fff;
+  font-size: 100px;
 }
 
 #valuesFooter{

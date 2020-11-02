@@ -1,10 +1,10 @@
+//WEEKACTIVITIES//
 d3.json('data.json').then(function(data) {
 
   var margin = 4,
-    width = 200,
+    width = 185,
     height = 100,
     textHeight = 20
-
 
     var areaWorkoutsPerWeek = d3.select("#areaWorkoutsPerWeek")
       .append('svg')
@@ -31,15 +31,13 @@ console.log(arrayWorkoutsPerWeek);
       .range([0,height-margin]);
 
     xScale = d3.scaleBand()
-    // .domain(arrayWorkoutsPerWeek.map(d => d.key))
-        .domain(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat','Sun'])
+    .domain(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat','Sun'])
     .range([0+margin, width]);
 
 //ADD AXIS
 xAxis = d3.axisBottom(xScale)
-      .tickValues([(d3.max(arrayWorkoutsPerWeek, function (d) {if (d.value.count >= (d3.max(arrayWorkoutsPerWeek, d => d.value.count))) {return (d.key)}})),"Mon", "Sun"])
+      .tickValues([(d3.max(arrayWorkoutsPerWeek, function (d) {if (d.value.count >= (d3.max(arrayWorkoutsPerWeek, d => d.value.count))) {return (d.key)}})),"Mon", "Sun"]) //MAX and MONDAY/SUNDAY
 
-             // .attr("font-size","20");
 
 xAxisG = areaWorkoutsPerWeek.append('g') //group element xAxis
 .attr('id', 'xAxis')
@@ -47,10 +45,6 @@ xAxisG = areaWorkoutsPerWeek.append('g') //group element xAxis
 
 xAxisG.call(xAxis) //syntax to call xAxis
   .attr('transform', 'translate(-9,' + (height-textHeight) +')');
-
-  // xAxis.select(".tick text")
-  //      .attr("font-size","20");
-// Add the area
 
 svg //creating pattern
   .append('defs')
@@ -64,7 +58,7 @@ svg //creating pattern
     .attr('stroke', '#FCE545')
     .attr('stroke-width', 0.5);
 
-areaWorkoutsPerWeek
+areaWorkoutsPerWeek //DARK AREACHART
               .datum(arrayWorkoutsPerWeek)
               .append("path")
               .attr('class', 'area1')
@@ -75,7 +69,7 @@ areaWorkoutsPerWeek
               )
               .attr("fill", "#55546E")
 
-areaWorkoutsPerWeek
+areaWorkoutsPerWeek //PATTERN AREACHART
                 .datum(arrayWorkoutsPerWeek)
                 .append("path")
                 .attr('class', 'area2')
@@ -83,17 +77,16 @@ areaWorkoutsPerWeek
                     .x(function(d) { return xScale(d.key); })
                     .y0(yScale(1))
                     .y1(function(d) { return yScale(d.value.count); })
-                            )
+                )
                 .attr('fill', 'url(#diagonalHatch)');
 });
 
 
-//SUFFERSCORE
-
+//SUFFERSCORE//
 d3.json('data.json').then(function(data) {
 
   var margin = 4,
-    width = 200,
+    width = 185,
     height = 100,
     textHeight = 20
 
@@ -117,11 +110,11 @@ var arraySufferScorePerMonth = d3.nest()
 //ADD SCALE
   yScale = d3.scaleLinear()
       .domain([d3.max(arraySufferScorePerMonth, d => d.value.sum)+1,20])
-      .range([20,height-margin]);
+      .range([10,80-margin]);
 
     xScale = d3.scaleBand()
     .domain(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul','Aug','Sep','Oct','Nov','Dec'])
-    .range([0+margin, width]);
+    .range([9+margin, width]);
 
 //ADD AXIS
 xAxis = d3.axisBottom(xScale)

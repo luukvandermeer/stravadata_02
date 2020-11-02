@@ -2,7 +2,7 @@
 d3.json('data.json').then(function(data) {
 
   var margin = 4,
-    width = 200,
+    width = 185,
     height = 125 - margin
 
     var barsCountWorkouts = d3.select("#barsCountWorkouts")
@@ -79,7 +79,7 @@ barsCountWorkouts.selectAll('text1')
 d3.json('data.json').then(function(data) {
 
   var margin = 4,
-    width = 200,
+    width = 185,
     height = 125 - margin
 
   var barsHoursWorkouts = d3.select("#barsHoursWorkouts")
@@ -156,7 +156,7 @@ barsHoursWorkouts.selectAll('text1')
 d3.json('data.json').then(function(data) {
 
   var margin = 4,
-    width = 200,
+    width = 185,
     height = 125 - margin
 
   var barsDistanceWorkouts = d3.select("#barsDistanceWorkouts")
