@@ -38,13 +38,14 @@ console.log(arrayWorkoutsPerWeek);
 xAxis = d3.axisBottom(xScale)
       .tickValues([(d3.max(arrayWorkoutsPerWeek, function (d) {if (d.value.count >= (d3.max(arrayWorkoutsPerWeek, d => d.value.count))) {return (d.key)}})),"Mon", "Sun"]) //MAX and MONDAY/SUNDAY
 
-
 xAxisG = areaWorkoutsPerWeek.append('g') //group element xAxis
 .attr('id', 'xAxis')
 .attr('class', 'xAxis');
 
 xAxisG.call(xAxis) //syntax to call xAxis
   .attr('transform', 'translate(-9,' + (height-textHeight) +')');
+
+
 
 svg //creating pattern
   .append('defs')

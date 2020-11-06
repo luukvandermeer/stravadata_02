@@ -27,6 +27,7 @@ h3 {
   line-height: 100%;
   color: #55546E;
   margin: 0px 0px 0px 0px;
+  text-transform: uppercase;
 }
 
 h4 {
@@ -59,6 +60,15 @@ h6 {
   margin: 0px 0px -15px 0px;
   }
 
+a:link {
+    color: #55546E;
+      font-weight: normal;
+  }
+
+a:visited {
+  color: #55546E;
+    font-weight: 700;
+}
 
 body {
   background-color: #55546E;
@@ -70,6 +80,16 @@ body {
 
 }
 
+.domain {
+  border-radius: -1px;
+  stroke-opacity: 0;
+}
+
+#g {
+  border-radius: -1px;
+  stroke-opacity: 0;
+}
+
 #container {
   display: grid;
   background: #FCE545;
@@ -79,17 +99,13 @@ body {
     "content content content content"
     "footer footer footer footer";
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 150px 500px .05fr 80px;
+  grid-template-rows: 120px 500px .05fr 80px;
   grid-gap: 10px;
   max-width: 800px;
   margin: auto;
   padding: 0px 51px 0px 51px;
   grid-auto-flow: row;
 }
-
-
-
-
 
 header {
   grid-row: header;
@@ -104,52 +120,32 @@ section {
 }
 
 main {
-  /* grid-row: content;
-  grid-column: content;
-  display: grid; */
-  /* display: flex;
-  flex-direction: column;
-  flex-wrap: wrap; */
-
-  /* grid-template-columns: repeat(4, 1fr);
-  grid-gap: 5px;
-  height: auto; */
-
   column-count: 4;
   column-gap: 1em;
   width: 800px;
+  margin: .5em 0 0 0;
 }
-
-
 
 footer {
   grid-row: footer;
   grid-column: footer;
+  text-align: right;
 }
 
-/* header, main, footer {
-  border: 1px dashed;
-} */
 
-/* CHART */
+/* CHARTS */
 .chart {
   width: 800px;
-  height: 500px;
+  /* height: 500px; */
   /* border: solid 1px #000; */
 }
 
-
-#areaWorkoutsPerWeek{
+#areaWorkoutsPerWeek, #areaSufferScorePerMonth{
   width: 185px;
   height: 100px;
   /* border: solid 1px #000; */
 }
 
-#areaSufferScorePerMonth{
-  width: 185px;
-  height: 100px;
-  /* border: solid 1px #000; */
-}
 svg {
   /* background-color: #fff; */
 }
@@ -162,6 +158,14 @@ svg {
   font-family: PT Mono;
   font-style: normal;
   text-transform: uppercase;
+}
+
+.xAxis text1 {
+  fill: #55546E;
+  font-family: Roboto Mono;
+  /* font-style: normal; */
+  font-weight: 500;
+  text-transform: uppercase;
   /* background-color: black; */
 }
 
@@ -173,23 +177,12 @@ svg {
 }
 
 
-.barsCountWorkouts {
+.barsCountWorkouts, .barsHoursWorkouts,  .barsDistanceWorkouts  {
   width: 200px;
 height: 110px;
   margin: 4px;
 }
 
-.barsHoursWorkouts {
-  width: 200px;
-  height: 110px;
-      margin: 4px;
-}
-
-.barsDistanceWorkouts {
-  width: 200px;
-  height: 110px;
-  margin: 4px;
-}
 
 .areaWorkoutsPerWeek {
   width: 200px;
@@ -212,7 +205,7 @@ height: 110px;
   width: 100%;
   /* background-color: #eee; */
 display: inline-block;
-margin: 0 0 1em;
+/* margin: 0 0 1em; */
 width: 100%;
 }
 .metricSmall {

@@ -87,6 +87,8 @@ CSS
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Oswald|PT+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+
   <link href="//db.onlinewebfonts.com/c/510c631b494ab204ca3399d91a9074f6?family=FilmotypeGiant" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
 
@@ -96,7 +98,7 @@ CSS
 
   <div id="container">
     <header>
-      <h2>A year on Strava</h2>
+      <h2>A year on Strava </h2>
       <h1>ACTIVITY</h1>
         <hr class="breakLine">
       <h3>Activities in  <span class="activeYear"></span></h3>
@@ -142,7 +144,7 @@ CSS
         <h4>RIDES REALDEAL/VIRTUAL</h4>
         <h6><span class="workoutsRealdeal" id="valuesLightMedium"></span><span id="valuesLightMedium">/</span><span class="workoutsVirtual" id="valuesLightMedium"></span></h6>
         <h5>Virtual rides were <span class="workoutsHoursChangeVirtual" id="valuesFooter"></span><span class="workoutsRealdealVirtual" id="valuesFooter"></span>in time</h5>
-        <hr class="breakLine">
+        <!-- <hr class="breakLine"> -->
       </div>
 
 <!-- 2nd COLUMN -->
@@ -166,9 +168,9 @@ CSS
       </div>
       <div class="metricMedium">
         <h4>WORKOUTS PER WEEK</h4>
-        <svg id="areaWorkoutsPerWeek" class="areaWorkoutsPerWeek">
+        <svg class="areaWorkoutsPerWeek" id="areaWorkoutsPerWeek">
         </svg>
-        <hr class="breakLine">
+        <!-- <hr class="breakLine"> -->
       </div>
 
   <!-- 3th COLUMN     -->
@@ -202,7 +204,7 @@ CSS
         <h4>TOTAL CLIMBING</h4>
         <h6><span class="climbing" id="valuesLightMedium"></span></h6>
         <h5>That's <span class="climbingDetails" id="valuesFooter"></span> the Mount Everest</h5>
-        <hr class="breakLine">
+        <!-- <hr class="breakLine"> -->
       </div>
 
   <!-- 4th COLUMN -->
@@ -228,23 +230,17 @@ CSS
         </svg>
             <hr class="breakLine">
       </div>
-
-
-
-
-
-
-
       <div class="metricSmall">
         <h4>CALORIES BURNED</h4>
         <h6><span class="calories" id="valuesDarkSmall"></span></h6>
         <h5>This is equal to <span class="caloriesDetails" id="valuesFooter"></span> slices of apple pie</h5>
-        <hr class="breakLine">
+        <!-- <hr class="breakLine"> -->
       </div>
     </main>
 
     <footer>
-      <p>Footer</p>
+        <hr class="breakLine">
+    <h5>An interactive tribute to the <a href="http://feltron.com/" target="_blank"> Feltron Reports</a></h5>
     </footer>
 
   </div>

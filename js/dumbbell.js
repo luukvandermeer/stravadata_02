@@ -6,7 +6,7 @@ var margin = 48,
 
 var svg = d3.select('.chart')
   .append('svg')
-  .attr('width', width + 'px')
+  .attr('width', 760 + 'px') //changed with to remove JAN tick on X axis
   .attr('height', height + 'px')
 
 //CHART
@@ -40,18 +40,6 @@ yScale = d3.scaleTime()
 .nice()
 .range([margin,height-margin-2]);
 
-// Add a scale to the fill or stroke of the circles/lines
-// cScale = d3.scaleOrdinal()
-// .domain([0,1])
-// .range(['#333', '#ff6600'])
-
-// gridlines in x axis function
-function make_x_gridlines() {
-    return d3.axisBottom(xScale)
-        .ticks(12)
-
-}
-
 //ADD AXIS
 xAxis = d3.axisBottom(xScale)
 .tickFormat(d3.timeFormat("%b"))
@@ -63,7 +51,8 @@ yAxis = d3.axisLeft(yScale)
 
 xAxisG = svg.append('g') //group element xAxis
 .attr('id', 'xAxis')
-.attr('class', 'xAxis');
+.attr('class', 'xAxis')
+;
 
 yAxisG = svg.append('g') //group element yAxis
 .attr('id', 'yAxis')
@@ -76,18 +65,31 @@ xAxisG.call(xAxis) //syntax to call xAxis
     .attr("x", 15)
     .style("text-anchor", "start");
 
+
+
 yAxisG.call(yAxis) //syntax to call xAxis
 .attr('transform', 'translate(48,0)');
 
-svg.append("g")
-    .attr("class", "grid")
+
+// // gridlines in x axis function
+function make_x_gridlines() {
+    return d3.axisBottom(xScale)
+        .ticks(11)
+}
+
+
+svg.append("g") //MAKES VERTICAL AXIS LINES
+    // .attr("class", "grid")
     .attr("transform", "translate(0," + height + ")")
     .call(make_x_gridlines()
         .tickSize(-(height-margin))
         .tickFormat(""))
-    .call(g => g.selectAll(".tick:not(:first-of-type) line")
+    // .call(g => g.selectAll(".tick:not(:first-of-type) line")
+    .call(g => g.selectAll(".tick line")
     .attr("stroke-opacity", 0.1)
     .attr("stroke-dasharray", "2,2"))
+
+
 
 //LINES
   lines = svg.selectAll('.line')
