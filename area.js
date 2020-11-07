@@ -119,6 +119,7 @@ var arraySufferScorePerMonth = d3.nest()
 
 //ADD AXIS
 xAxis = d3.axisBottom(xScale)
+// .attr('class','ticks ')
       .tickValues([(d3.max(arraySufferScorePerMonth, function (d) {if (d.value.sum >= (d3.max(arraySufferScorePerMonth, d => d.value.sum))) {return (d.key)}})),"Jan", "Dec"])
 
 xAxisG = areaSufferScorePerMonth.append('g') //group element xAxis

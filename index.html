@@ -8,57 +8,23 @@ Design
 
 
 METRICS.JS
-V Create event count
-V Calculaition alone rides vs TOGETHER. -> NEED TOGETHER RIDE
-V Calculation time workouts alone vs Together
-- Change time Alone vs Together to distance? -> Doesn't work for other workouts
-V Count countries
-V Separation Countries
-V Transition numbers TWEEN - http://4waisenkinder.de/blog/2014/05/11/d3-dot-js-tween-in-detail/
-V Formating Time timeFormat https://bl.ocks.org/zanarmstrong/raw/ca0adb7e426c12c06a95/
-V CALCULATION TUFFEST DAY make easier
-- timeformat Seconds to HH:MM:SS
-V Farthest distance
-V Climbing + Calories BURNED
-V Shortest distance
-V Realdeal VS Virtual
-V Fixed activeMonthDetails issue
-V Added most & least active month
-> workoutsPerWeek
 - Measuring interval between activities
 
 
 DUMBBELL.JS
-V Try to link d.start_date_local to Y position of circle to testout concept
-V Fix X axis (months)
-V Fix Y axis (times)
-V Chart dots begin and end event
 > Fix lines and dots for event which take longer then one DAY
   Potential solution: Create two different dummbells. If day and movingtime are > 23:59:59, use two differetn line components.
-
       if time of the day (including moving_time)> is bigger then 24:00:00 then +1 day.
       https://stackoverflow.com/questions/18796291/d3-get-current-time-and-subtract-by-2-hours/18796598
-
 - Animation chart
 - Animation numbers -> https://observablehq.com/@d3/transition-texttween
 
-BARS.JS
-V Create Array of data
-V https://observablehq.com/@andrew1johnston/horizontal-bar-chart-a-la-feltron-annual-report-2013
-
 AREA.JS
-V https://observablehq.com/@barrerajulio/d3-area-multi-line-experiment
-V Add pattern -> https://stackoverflow.com/questions/17776641/fill-rect-with-pattern
-V Add pattern -> https://medium.com/@louisemoxy/how-to-create-a-d3-js-stacked-area-chart-with-pattern-fills-3bc4585a36ca
-V D3 patterns -> https://iros.github.io/patternfills/sample_d3.html
 - Styled axis -> https://observablehq.com/@d3/styled-axes
 - Hightlight X axis -> https://bl.ocks.org/wjones127/4ee8ffdb1327cf34e13c3f256cbc18f1
 
-
 CSS
-- Create header, main, footer for each METRIC box (maybe flexbox)
-- Sizing fonts (depending input)
--
+
 
 -->
 
@@ -89,7 +55,7 @@ CSS
   <link href="https://fonts.googleapis.com/css?family=Oswald|PT+Mono&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
 
-  <link href="//db.onlinewebfonts.com/c/510c631b494ab204ca3399d91a9074f6?family=FilmotypeGiant" rel="stylesheet">
+  <!-- <link href="//db.onlinewebfonts.com/c/510c631b494ab204ca3399d91a9074f6?family=FilmotypeGiant" rel="stylesheet"> -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
 
 </head>
