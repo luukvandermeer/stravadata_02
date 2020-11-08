@@ -96,10 +96,14 @@ svg.append("g")
     .append('line')
     // .attr('class', 'line')
     .attr("class", function(d,i) {return "line" + d.id; })
-    .attr('x1', 0)
-    .attr('x2', 0)
-    .attr('y1', 0)
-    .attr('y2', 0)
+    .attr('x1', width/2)
+    .attr('x2', width/2)
+    .attr('y1', function(d) {
+      return yScale(new Date("2020-01-01 "+(d3.timeFormat("%H:%M:%S")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))))) // uses fixed date and variable HH:MM:SS for yScale
+    })
+    .attr('y2', function(d) {
+      return yScale(new Date("2020-01-01 "+(d3.timeFormat("%H:%M:%S")(parseFloat(d3.timeFormat("%Q")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))+d.moving_time*1000)))); //calculate d.start_date_local to UNIC EPOCH, add movingtime (milli) seconds, uses fixed date and variable HH:MM:SS for yScale
+    })
     .attr('stroke', '#FFF')
     .attr('stroke-opacity', 0)
     .on("mouseover", createToolTip)
@@ -109,8 +113,12 @@ linesHover = svg.selectAll('linesHover') //creating array behind line for hover
       .data(data)
       .enter()
       .append('line')
-      .attr('x1', 0)
-      .attr('x2', 0)
+      .attr('x1', function(d) {
+          return xScale(new Date(d3.timeFormat("%Y,%m,%d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))) //calculates which day of the year
+      })
+      .attr('x2', function(d) {
+          return xScale(new Date(d3.timeFormat("%Y,%m,%d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))) //calculates which day of the year
+      })
       .attr("y1", 0+margin)
       .attr("y2", height-margin)
       .attr('stroke', '#FCE545')
@@ -124,9 +132,9 @@ linesHover = svg.selectAll('linesHover') //creating array behind line for hover
     .enter()
     .append('circle')
     .attr('class', 'circle1')
-    .attr('cx', 0)
+        .attr('cx', width/2)
 
-    .attr('cy', 0)
+    .attr('cy', (height/2))
     .attr('r', 0)
     .attr('width', 20)
     .attr('height', 20)
@@ -140,8 +148,8 @@ circlesX2 = svg.selectAll('circles')
     .enter()
     .append('circle')
     .attr('class', 'circle2')
-    .attr('cx', 0)
-    .attr('cy', 0)
+    .attr('cx', width/2)
+    .attr('cy', (height/2))
     .attr('r', 0)
     .attr('width', 20)
     .attr('height', 20)
@@ -234,12 +242,6 @@ lines.transition()
 })
 .attr('x2', function(d) {
     return xScale(new Date(d3.timeFormat("%Y,%m,%d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))) //calculates which day of the year
-})
-.attr('y1', function(d) {
-  return yScale(new Date("2020-01-01 "+(d3.timeFormat("%H:%M:%S")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))))) // uses fixed date and variable HH:MM:SS for yScale
-})
-.attr('y2', function(d) {
-  return yScale(new Date("2020-01-01 "+(d3.timeFormat("%H:%M:%S")(parseFloat(d3.timeFormat("%Q")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))+d.moving_time*1000)))); //calculate d.start_date_local to UNIC EPOCH, add movingtime (milli) seconds, uses fixed date and variable HH:MM:SS for yScale
 })
 .attr('stroke-opacity', 1)
 }

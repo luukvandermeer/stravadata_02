@@ -28,7 +28,7 @@ console.log(arrayWorkoutsPerWeek);
 //ADD SCALE
   yScale = d3.scaleLinear()
       .domain([d3.max(arrayWorkoutsPerWeek, d => d.value.count)+1,0])
-      .range([0,height-margin]);
+      .range([0,85-margin]);
 
     xScale = d3.scaleBand()
     .domain(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat','Sun'])
@@ -75,12 +75,27 @@ areaWorkoutsPerWeek //PATTERN AREACHART
                 .append("path")
                 .attr('class', 'area2')
                 .attr("d", d3.area()
-                    .x(function(d) { return xScale(d.key); })
-                    .y0(yScale(1))
-                    .y1(function(d) { return yScale(d.value.count); })
+                    .x(0)
+                    .y0(0)
+                    .y1(0)
                 )
                 .attr('fill', 'url(#diagonalHatch)');
+update();
 });
+
+function update(d,i){
+areaWorkoutsPerWeek.transition()
+  // .delay(120)
+  .delay(120)
+  .duration(1200)
+  .attr("d", d3.area()
+      .x(function(d) { return xScale(d.key); })
+      .y0(yScale(1))
+      .y1(function(d) { return yScale(d.value.count); })
+  )
+
+
+}
 
 
 //SUFFERSCORE//
@@ -111,7 +126,7 @@ var arraySufferScorePerMonth = d3.nest()
 //ADD SCALE
   yScale = d3.scaleLinear()
       .domain([d3.max(arraySufferScorePerMonth, d => d.value.sum)+1,20])
-      .range([10,80-margin]);
+      .range([10,85-margin]);
 
     xScale = d3.scaleBand()
     .domain(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul','Aug','Sep','Oct','Nov','Dec'])
