@@ -15,7 +15,8 @@ d3.json('data.json').then(function(data) {
       .rollup(function (values) {return {
         count: d3.count(values, function(d) {return d.id;}),
       }})
-      .entries(data);
+      .entries(data)
+      .sort(function(a, b){return d3.descending(a.value.count, b.value.count); });
 
 //ADD SCALE
   xScale = d3.scaleLinear()
@@ -92,7 +93,8 @@ d3.json('data.json').then(function(data) {
       .rollup(function (values) {return {
         moving_time: d3.sum(values, function(d) {return (d.moving_time)/3600;}),
       }})
-      .entries(data);
+      .entries(data)
+      .sort(function(a, b){return d3.descending(a.value.moving_time, b.value.moving_time); });
 
 //ADD SCALE
   xScale = d3.scaleLinear()
@@ -133,7 +135,7 @@ barsHoursWorkouts.selectAll('text')
 .append('text')
 .attr('x', width - 0)
 .attr('y', function(d, i) {return (yScale(d.key))+20; })
-.text(d => (d3.format(",.1f")(d.value.moving_time)))
+.text(d => (d3.format(",.0f")(d.value.moving_time)))
 .attr("fill", '#55546E')
 .style("font", "13px pt mono")
 .style('font-weight', 'bold')
@@ -169,7 +171,8 @@ d3.json('data.json').then(function(data) {
       .rollup(function (values) {return {
         distance: d3.sum(values, function(d) {return ((d.distance)/1000)}),
       }})
-      .entries(data);
+      .entries(data)
+      .sort(function(a, b){return d3.descending(a.value.distance, b.value.distance); });
 
 //ADD SCALE
   xScale = d3.scaleLinear()
@@ -224,7 +227,6 @@ barsDistanceWorkouts.selectAll('text1')
 .append('text')
 .attr('x', 0)
 .attr('y', function(d, i) {return (yScale(d.key))+20; })
-// .text(0).transition().delay(600).tween('text', tweenText(d => (d.key)))
 .text(d => (d.key))
 .attr("fill", '#55546E')
 .style("font", "13px pt sans")
@@ -242,5 +244,4 @@ function tweenText(newValue) {
     };
   }
 }
-
 });

@@ -1,6 +1,6 @@
 var margin = 48,
   width = 800,
-  height = 500;
+  height = 400;
 
 var svg = d3.select('.chart')
   .append('svg')
@@ -61,7 +61,7 @@ yAxisG = svg.append('g') //group element yAxis
 .attr('class', 'yAxis');
 
 xAxisG.call(xAxis) //syntax to call xAxis
-  .attr('transform', 'translate(0,' + (500-30) +')')
+  .attr('transform', 'translate(0,' + (height-30) +')')
   .selectAll("text")
     .attr("y", 6)
     .attr("x", 15)
@@ -96,10 +96,14 @@ svg.append("g")
     .append('line')
     // .attr('class', 'line')
     .attr("class", function(d,i) {return "line" + d.id; })
-    .attr('x1', 0)
-    .attr('x2', 0)
-    .attr('y1', 0)
-    .attr('y2', 0)
+    .attr('x1', function(d) {
+        return xScale(new Date(d3.timeFormat("%Y,%m,%d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))) //calculates which day of the year
+    })
+    .attr('x2', function(d) {
+        return xScale(new Date(d3.timeFormat("%Y,%m,%d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))) //calculates which day of the year
+    })
+    .attr('y1', height/2)
+    .attr('y2', height/2)
     .attr('stroke', '#FFF')
     .attr('stroke-opacity', 0)
     .on("mouseover", createToolTip)
@@ -124,9 +128,10 @@ linesHover = svg.selectAll('linesHover') //creating array behind line for hover
     .enter()
     .append('circle')
     .attr('class', 'circle1')
-    .attr('cx', 0)
-
-    .attr('cy', 0)
+    .attr('cx', function(d) {
+      return xScale(new Date(d3.timeFormat("%Y,%m,%d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))) //calculates which day of the year
+    })
+    .attr('cy', height/2)
     .attr('r', 0)
     .attr('width', 20)
     .attr('height', 20)
@@ -140,8 +145,10 @@ circlesX2 = svg.selectAll('circles')
     .enter()
     .append('circle')
     .attr('class', 'circle2')
-    .attr('cx', 0)
-    .attr('cy', 0)
+    .attr('cx', function(d) {
+      return xScale(new Date(d3.timeFormat("%Y,%m,%d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))) //calculates which day of the year
+    })
+    .attr('cy', height/2)
     .attr('r', 0)
     .attr('width', 20)
     .attr('height', 20)
@@ -165,7 +172,7 @@ var hoverLine = svg.append("g")
 
 function createToolTip (d,i) {
           d3.select(this)
-              .style("stroke-width", 6)
+              .style("stroke-width", 4)
               toolTip.transition()
                   .duration(100)
                   .style("opacity", .9);
@@ -207,9 +214,7 @@ circlesX1.transition()
   .duration(1200)
   .attr('r', 1.2)
   .attr('opacity', 1)
-  .attr('cx', function(d) {
-    return xScale(new Date(d3.timeFormat("%Y,%m,%d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))) //calculates which day of the year
-  })
+
   .attr('cy', function(d) {
   return yScale(new Date("2020-01-01 "+(d3.timeFormat("%H:%M:%S")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))))) // uses fixed date and variable HH:MM:SS for yScale
   })
@@ -219,9 +224,7 @@ circlesX2.transition()
     .duration(1200)
     .attr('r', 1.2)
     .attr('opacity', 2)
-    .attr('cx', function(d) {
-      return xScale(new Date(d3.timeFormat("%Y,%m,%d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))) //calculates which day of the year
-    })
+
     .attr('cy', function(d) {
       return yScale(new Date("2020-01-01 "+(d3.timeFormat("%H:%M:%S")(parseFloat(d3.timeFormat("%Q")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))+d.moving_time*1000)))); //calculate d.start_date_local to UNIC EPOCH, add movingtime (milli) seconds, uses fixed date and variable HH:MM:SS for yScale
     })
@@ -229,12 +232,7 @@ lines.transition()
 // .delay(120)
   .delay(function(d,i) {return (d.elapsed_time/2)})
 .duration(1200)
-.attr('x1', function(d) {
-    return xScale(new Date(d3.timeFormat("%Y,%m,%d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))) //calculates which day of the year
-})
-.attr('x2', function(d) {
-    return xScale(new Date(d3.timeFormat("%Y,%m,%d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))) //calculates which day of the year
-})
+
 .attr('y1', function(d) {
   return yScale(new Date("2020-01-01 "+(d3.timeFormat("%H:%M:%S")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))))) // uses fixed date and variable HH:MM:SS for yScale
 })
@@ -243,36 +241,3 @@ lines.transition()
 })
 .attr('stroke-opacity', 1)
 }
-
-
-// function update(d,i){
-// circlesX1.transition()
-//   // .delay(120)
-//   .delay(function(d,i) {return (d.moving_time/2)})
-//   .duration(1200)
-//   .attr('r', 1.75)
-//   .attr('opacity', 1)
-//   .attr('cx', function(d) {
-//     return xScale(new Date(d3.timeFormat("%Y,%m,%d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))) //calculates which day of the year
-//   })
-// circlesX2.transition()
-//     // .delay(120)
-//       .delay(function(d,i) {return (d.moving_time/2)})
-//     .duration(1200)
-//     .attr('r', 2)
-//     .attr('opacity', 2)
-//     .attr('cx', function(d) {
-//       return xScale(new Date(d3.timeFormat("%Y,%m,%d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))) //calculates which day of the year
-//     })
-// lines.transition()
-// // .delay(120)
-//   .delay(function(d,i) {return (d.elapsed_time/2)})
-// .duration(1200)
-// .attr('x1', function(d) {
-//     return xScale(new Date(d3.timeFormat("%Y,%m,%d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))) //calculates which day of the year
-// })
-// .attr('x2', function(d) {
-//     return xScale(new Date(d3.timeFormat("%Y,%m,%d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))) //calculates which day of the year
-// })
-// .attr('stroke-opacity', 1)
-// }

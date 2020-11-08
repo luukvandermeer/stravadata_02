@@ -59,22 +59,17 @@ var arrayActiveTimeOfDay = d3.nest()
 var activeTimeOfDay = d3.max(arrayActiveTimeOfDay, function (d) {if (d.value.moving_time >= (d3.max(arrayActiveTimeOfDay, d => d.value.moving_time))) {return (d.key)}});
 var activeTimeOfDayDetails = d3.max(arrayActiveTimeOfDay, function(d) {if (d.value.moving_time >= (d3.max(arrayActiveTimeOfDay, d => d.value.moving_time))) {return [d.value.workouts]}})
 
-
-
-var now = new Date;
-console.log(d3.timeSunday.count(d3.timeYear(now), now));
-console.log(now);
   //Add variables to span
   // d3.select(".workoutsCount").text((workoutsCount))
   d3.select(".activeYear").text(d3.timeFormat("%Y")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(tuffestDay)))
-  d3.select(".workoutsCount").text(0).transition().delay(700).tween('text', tweenText(workoutsCount))
+  d3.select(".workoutsCount").text(0).transition().delay(2000).duration(2000).tween('text', tweenText(workoutsCount))
   d3.select(".workoutsCountWeek").text(d3.format(",.1f")(workoutsCountWeek))
   d3.select(".workoutsHoursTotal").text(d3.format(",.1f")(workoutsHours))
-  d3.select(".workoutsHoursPerDay").text(d3.format(",.2f")(workoutsHours / 8760)) //devided by total hours a year
-  d3.select(".workoutsAlone").text((workoutsCount - workoutsTogether))
-  d3.select(".workoutsTogether").text(0).transition().delay(600).tween('text', tweenText(workoutsTogether))
+  d3.select(".workoutsHoursPerDay").text(d3.format(",.2f")(workoutsHours / 365))
+  d3.select(".workoutsAlone").text(0).transition().delay(2000).duration(2000).tween('text', tweenText((workoutsCount - workoutsTogether)))
+  d3.select(".workoutsTogether").text(0).transition().delay(2000).duration(1200).tween('text', tweenText(workoutsTogether))
   d3.select(".workoutsHoursChange").text((d3.format("+.0%")((workoutsHoursTogetherMean - workoutsHoursAloneMean) / workoutsHoursAloneMean)) + " " + (workoutsAloneTogether))
-  d3.select(".countriesVisitedCount").text(d3.format(",.0f")(countriesVisitedCount.length))
+  d3.select(".countriesVisitedCount").text(0).transition().delay(2000).duration(2000).tween('text', tweenText((d3.format(",.0f")(countriesVisitedCount.length))))
   d3.select(".countriesVisited").text((countriesVisited.join(' | ')))
   d3.select(".tuffestDay").text(d3.timeFormat("%b %d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(tuffestDay))) //Calculate date format to timeParse and the to timeFormat Month day
   d3.select(".tuffestDayDetails").text((tuffestDayDetails.join(' | ')))

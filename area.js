@@ -75,27 +75,14 @@ areaWorkoutsPerWeek //PATTERN AREACHART
                 .append("path")
                 .attr('class', 'area2')
                 .attr("d", d3.area()
-                    .x(0)
-                    .y0(0)
-                    .y1(0)
+                    .x(function(d) { return xScale(d.key); })
+                    .y0(yScale(1))
+                    .y1(function(d) { return yScale(d.value.count); })
                 )
                 .attr('fill', 'url(#diagonalHatch)');
-update();
 });
 
-function update(d,i){
-areaWorkoutsPerWeek.transition()
-  // .delay(120)
-  .delay(120)
-  .duration(1200)
-  .attr("d", d3.area()
-      .x(function(d) { return xScale(d.key); })
-      .y0(yScale(1))
-      .y1(function(d) { return yScale(d.value.count); })
-  )
 
-
-}
 
 
 //SUFFERSCORE//
@@ -164,4 +151,5 @@ areaSufferScorePerMonth.selectAll("svg")
      .attr("cx", function(d) { return xScale(d.key) })
      .attr("cy", function(d) { return yScale(d.value.sum) })
      .attr("r", 2)
+
 });
