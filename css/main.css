@@ -77,9 +77,11 @@ body {
 
 .breakLine {
   border: 1px dotted #A99D5A; */
-
 }
 
+.mobileBreakLine {
+  border: 0px dotted #A99D5A; */
+}
 
 
 
@@ -130,24 +132,17 @@ footer {
 /* CHARTS */
 .chart {
   width: 800px;
-  /* height: 500px; */
-  /* border: solid 1px #000; */
+  opacity: 1;
+}
+
+.chartmobile {
+  opacity: 1;
+  height: 0px;
 }
 
 .domain {
   border-radius: -1px;
   stroke-opacity: 0;
-}
-
-.circle1{
-  /* r: 1.75px; */
-}
-
-.circle2{
-  /* r: 1.75px; */
-}
-.line{
-
 }
 
 .tooltip {
@@ -285,7 +280,7 @@ width: 100%;
 
 
 /* CSS Mobile */
-/* @media screen and (max-width: 800px) {
+@media screen and (max-width: 2000px) {
   #container {
     display: grid;
     background: #FCE545;
@@ -295,28 +290,53 @@ width: 100%;
       "content content content content"
       "footer footer footer footer";
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 120px 250px .05fr 80px;
-    grid-gap: 10px;
-    max-width: 250px;
+    grid-template-rows: 120px 800px .05fr 80px;
+    grid-gap: 20px;
+    max-width: 400px;
     margin: auto;
-    padding: 0px 51px 0px 51px;
+    padding: 0px 20px 0px 20px;
     grid-auto-flow: row;
   }
+.chart {
+  opacity: 0;
+  height: 0px;
+}
 
-  .chart {
-    width: 250px;
+  .chartmobile {
+    opacity: 1;
+    /* height: 0px; */
   }
+
+
+
+  header {
+    grid-row: header;
+    grid-column: header;
+    padding-top: 34px;
+    max-width: 400px;
+  }
+
   section {
     grid-row: chart;
     grid-column: chart;
-    max-width: 250px;
+    max-width: 400px;
   }
 
   main {
-    column-count: 1;
+    column-count: 2;
     column-gap: 1em;
-    width: 250px;
+    width: 400px;
     margin: .5em 0 0 0;
   }
+  footer {
+    grid-row: footer;
+    grid-column: footer;
+    text-align: right;
+    max-width: 400px;
+  }
+  .mobileBreakLine {
+    border: 1px dotted #A99D5A; */
+  }
 
-} */
+
+}

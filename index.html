@@ -46,7 +46,8 @@ CSS
   <script type="text/javascript" src="/js/d3.min.js"></script>
   <script type="text/javascript" src="/js/d3-array.min.js"></script>
   <script type="text/javascript" src="/js/metrics.js"></script>
-  <script type="text/javascript" src="/js/dumbbell.js"></script>
+  <!-- <script type="text/javascript" src="/js/dumbbell.js"></script> -->
+  <script type="text/javascript" src="/js/mobile_dumbbell.js"></script>
   <script type="text/javascript" src="/bars.js"></script>
   <script type="text/javascript" src="/area.js"></script>
 
@@ -71,9 +72,16 @@ CSS
     </header>
 
     <section>
+      <div class="chartmobile">
+        <script type="text/javascript" src="/js/mobile_dumbbell.js"></script>
+        <!-- <script type="text/javascript" src="/js/dumbbell.js"></script> -->
+      </div>
+
       <div class="chart">
+        <!-- <script type="text/javascript" src="/js/mobile_dumbbell.js"></script> -->
         <script type="text/javascript" src="/js/dumbbell.js"></script>
       </div>
+
         <hr class="breakLine">
     </section>
 
@@ -110,7 +118,7 @@ CSS
         <h4>RIDES REALDEAL/VIRTUAL</h4>
         <h6><span class="workoutsRealdeal" id="valuesLightMedium"></span><span id="valuesLightMedium">/</span><span class="workoutsVirtual" id="valuesLightMedium"></span></h6>
         <h5>Virtual rides were<span class="workoutsHoursChangeVirtual" id="valuesFooter"></span><span class="workoutsRealdealVirtual" id="valuesFooter"></span>in time</h5>
-        <!-- <hr class="breakLine"> -->
+        <hr class="mobileBreakLine">
       </div>
 
 <!-- 2nd COLUMN -->
@@ -170,7 +178,7 @@ CSS
         <h4>TOTAL CLIMBING</h4>
         <h6><span class="climbing" id="valuesLightMedium"></span></h6>
         <h5>That's<span class="climbingDetails" id="valuesFooter"></span>the Mount Everest</h5>
-        <!-- <hr class="breakLine"> -->
+        <hr class="mobileBreakLine">
       </div>
 
   <!-- 4th COLUMN -->

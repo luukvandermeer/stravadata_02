@@ -142,7 +142,7 @@ areaSufferScorePerMonth
               )
               .attr("fill", "#ffffff")
 
-areaSufferScorePerMonth.selectAll("svg")
+areaSufferScorePerMonth.selectAll("circlesArea")
    .data(arraySufferScorePerMonth)
    .enter()
    .append("circle")
@@ -151,5 +151,15 @@ areaSufferScorePerMonth.selectAll("svg")
      .attr("cx", function(d) { return xScale(d.key) })
      .attr("cy", function(d) { return yScale(d.value.sum) })
      .attr("r", 2)
-
+    .attr('opacity', 1)
+// update();
 });
+
+// function update(d,i){
+// circlesArea.transition()
+//   // .delay(120)
+//   .delay(120)
+//   .duration(1200)
+//   .attr('opacity', 1)
+//   console.log("update testje");
+// }

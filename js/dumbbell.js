@@ -75,13 +75,13 @@ yAxisG.call(yAxis) //syntax to call xAxis
 /////////////VERTICAL AXIS LINES//////////////////
 // // gridlines in x axis function
 function make_x_gridlines() {
-    return d3.axisBottom(xScale)
+    return d3.axisBottom(yScale)
         .ticks(11)}
 
 svg.append("g")
-    .attr("transform", "translate(0," + height + ")")
+    .attr("transform", "translate(0," + width + ")")
     .call(make_x_gridlines()
-        .tickSize(-(height-margin))
+        .tickSize(-(width-margin))
         .tickFormat(""))
     .call(g => g.selectAll(".tick line")
     .attr("stroke-opacity", 0.1)
@@ -113,8 +113,12 @@ linesHover = svg.selectAll('linesHover') //creating array behind line for hover
       .data(data)
       .enter()
       .append('line')
-      .attr('x1', 0)
-      .attr('x2', 0)
+      .attr('x1', function(d) {
+          return xScale(new Date(d3.timeFormat("%Y,%m,%d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))) //calculates which day of the year
+      })
+      .attr('x2', function(d) {
+          return xScale(new Date(d3.timeFormat("%Y,%m,%d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))) //calculates which day of the year
+      })
       .attr("y1", 0+margin)
       .attr("y2", height-margin)
       .attr('stroke', '#FCE545')
