@@ -132,12 +132,11 @@ footer {
 /* CHARTS */
 .chart {
   width: 800px;
-  opacity: 1;
+  display: block;
 }
 
 .chartmobile {
-  opacity: 1;
-  height: 0px;
+  display: none;
 }
 
 .domain {
@@ -280,7 +279,7 @@ width: 100%;
 
 
 /* CSS Mobile */
-@media screen and (max-width: 2000px) {
+@media screen and (max-width: 800px) {
   #container {
     display: grid;
     background: #FCE545;
@@ -298,13 +297,11 @@ width: 100%;
     grid-auto-flow: row;
   }
 .chart {
-  opacity: 0;
-  height: 0px;
+  display: none;
 }
 
   .chartmobile {
-    opacity: 1;
-    /* height: 0px; */
+    display: block;
   }
 
 

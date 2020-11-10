@@ -72,13 +72,13 @@ yAxisG.call(yAxis) //syntax to call xAxis
 
 /////////////VERTICAL AXIS LINES//////////////////
 // // gridlines in x axis function
-function make_x_gridlines() {
+function make_y_gridlines() {
     return d3.axisLeft(xScale)
         .ticks(11)}
 
 svg.append("g")
     .attr("transform", "translate(0," + 0 + ")")
-    .call(make_x_gridlines()
+    .call(make_y_gridlines()
         .tickSize(-(height-margin))
         .tickFormat(""))
     .call(g => g.selectAll(".tick line")
