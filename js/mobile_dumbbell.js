@@ -1,8 +1,8 @@
 var margin = 30,
-  width = 400,
+  width = 350,
   height = 800;
 
-var svg = d3.select('.chartmobile')
+var svg = d3.select(".chartmobile")
   .append('svg')
   .attr('width', width + 'px') //changed with to remove JAN tick on X axis
   .attr('height', 780 + 'px')
@@ -22,9 +22,6 @@ d3.json('data.json').then(function(data) {
   activeYear = d3.min(data, function(d){ //determine year
     return d3.timeFormat("%Y")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local));
   });
-
-
-
 
 //ADD SCALE
 xScale = d3.scaleTime()
@@ -99,14 +96,10 @@ svg.append("g")
     .attr('y2', function(d) {
         return xScale(new Date(d3.timeFormat("%Y,%m,%d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))) //calculates which day of the year
     })
-    .attr('x1', function(d) {
-      return yScale(new Date("2020-01-01 "+(d3.timeFormat("%H:%M:%S")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))))) // uses fixed date and variable HH:MM:SS for yScale
-    })
-    .attr('x2', function(d) {
-      return yScale(new Date("2020-01-01 "+(d3.timeFormat("%H:%M:%S")(parseFloat(d3.timeFormat("%Q")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))+d.moving_time*1000)))); //calculate d.start_date_local to UNIC EPOCH, add movingtime (milli) seconds, uses fixed date and variable HH:MM:SS for yScale
-    })
+    .attr('x1', width/2)
+    .attr('x2', width/2)
     .attr('stroke', '#FFF')
-    .attr('stroke-opacity', 1)
+    .attr('stroke-opacity', 0)
     .on("mouseover", createToolTip)
     .on("mouseout", removeToolTip);
 
@@ -136,13 +129,11 @@ linesHover = svg.selectAll('linesHover') //creating array behind line for hover
     .attr('cy', function(d) {
       return xScale(new Date(d3.timeFormat("%Y,%m,%d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))) //calculates which day of the year
     })
-    .attr('cx', function(d) {
-    return yScale(new Date("2020-01-01 "+(d3.timeFormat("%H:%M:%S")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))))) // uses fixed date and variable HH:MM:SS for yScale
-    })
+    .attr('cx', width/2)
     .attr('r', 1.2)
     .attr('width', 20)
     .attr('height', 20)
-    .attr('opacity', 1)
+    .attr('opacity', 0)
     .style('fill', '#55546E')
     .on("mouseover", createToolTip)
     .on("mouseout", removeToolTip);
@@ -155,13 +146,11 @@ circlesX2 = svg.selectAll('circles')
     .attr('cy', function(d) {
       return xScale(new Date(d3.timeFormat("%Y,%m,%d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))) //calculates which day of the year
     })
-    .attr('cx', function(d) {
-      return yScale(new Date("2020-01-01 "+(d3.timeFormat("%H:%M:%S")(parseFloat(d3.timeFormat("%Q")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))+d.moving_time*1000)))); //calculate d.start_date_local to UNIC EPOCH, add movingtime (milli) seconds, uses fixed date and variable HH:MM:SS for yScale
-    })
+    .attr('cx', width/2)
     .attr('r', 1.2)
     .attr('width', 20)
     .attr('height', 20)
-    .attr('opacity', 1)
+    .attr('opacity', 0)
     .style('fill', '#55546E')
     .on("mouseover", createToolTip)
     .on("mouseout", removeToolTip);
@@ -186,8 +175,8 @@ function createToolTip (d,i) {
                   .duration(100)
                   .style("opacity", .9);
               toolTip.html((d.name) + "<br/>"  + ((d3.format(",.1f")(d.distance/1000)+"km") + "|" + ((d.total_elevation_gain)+"m")+ "|" + (d3.format(",.1f")(d.moving_time / 3600)+"h") + "|"+(d.suffer_score)+"pt"))
-                  .style("left", ((d3.event.pageX)+ 10) + "px")
-                  .style("top", ((d3.event.pageY)-15) + "px");
+                  .style("left", ((d3.event.pageX)+ 0) + "px")
+                  .style("top", ((d3.event.pageY)+5) + "px");
               hoverLine.transition()
                 .duration(100)
               .attr("y1", d3.mouse(this)[1])
@@ -207,46 +196,38 @@ function removeToolTip (d){
     }
 
 
-    // console.log(d3.timeFormat("%H:%M:%S")(parseFloat(d3.timeFormat("%Q")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")("2020-07-24T23:38:40Z")))+1994000));
-    // console.log(parseFloat(d3.timeFormat("%Q")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")("2020-02-15T01:24:32Z")))+1);
-    // console.log((d3.timeFormat("%Q")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")("2020-02-15T01:24:32Z")))+1);
-    // console.log(d3.timeFormat("%s")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")("2020-02-15T01:24:32Z")));
-    // console.log(d3.timeFormat("%H:%M:%S")(1581726272000));
-// update();
+update();
 });
 
-//
-// function update(d,i){
-// circlesX1.transition()
-//   // .delay(120)
-//   .delay(function(d,i) {return (d.moving_time/2)})
-//   .duration(1200)
-//   .attr('r', 1.2)
-//   .attr('opacity', 1)
-//
-//   .attr('cy', function(d) {
-//   return yScale(new Date("2020-01-01 "+(d3.timeFormat("%H:%M:%S")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))))) // uses fixed date and variable HH:MM:SS for yScale
-//   })
-// circlesX2.transition()
-//     // .delay(120)
-//       .delay(function(d,i) {return (d.moving_time/2)})
-//     .duration(1200)
-//     .attr('r', 1.2)
-//     .attr('opacity', 2)
-//
-//     .attr('cy', function(d) {
-//       return yScale(new Date("2020-01-01 "+(d3.timeFormat("%H:%M:%S")(parseFloat(d3.timeFormat("%Q")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))+d.moving_time*1000)))); //calculate d.start_date_local to UNIC EPOCH, add movingtime (milli) seconds, uses fixed date and variable HH:MM:SS for yScale
-//     })
-// lines.transition()
-// // .delay(120)
-//   .delay(function(d,i) {return (d.elapsed_time/2)})
-// .duration(1200)
-//
-// .attr('y1', function(d) {
-//   return yScale(new Date("2020-01-01 "+(d3.timeFormat("%H:%M:%S")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))))) // uses fixed date and variable HH:MM:SS for yScale
-// })
-// .attr('y2', function(d) {
-//   return yScale(new Date("2020-01-01 "+(d3.timeFormat("%H:%M:%S")(parseFloat(d3.timeFormat("%Q")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))+d.moving_time*1000)))); //calculate d.start_date_local to UNIC EPOCH, add movingtime (milli) seconds, uses fixed date and variable HH:MM:SS for yScale
-// })
-// .attr('stroke-opacity', 1)
-// }
+
+function update(d,i){
+circlesX1.transition()
+  .delay(function(d,i) {return (d.moving_time/2)})
+  .duration(1200)
+  .attr('r', 1.2)
+  .attr('opacity', 1)
+  .attr('cx', function(d) {
+  return yScale(new Date("2020-01-01 "+(d3.timeFormat("%H:%M:%S")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))))) // uses fixed date and variable HH:MM:SS for yScale
+  })
+
+circlesX2.transition()
+    .delay(function(d,i) {return (d.moving_time/2)})
+    .duration(1200)
+    .attr('r', 1.2)
+    .attr('opacity', 1)
+    .attr('cx', function(d) {
+      return yScale(new Date("2020-01-01 "+(d3.timeFormat("%H:%M:%S")(parseFloat(d3.timeFormat("%Q")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))+d.moving_time*1000)))); //calculate d.start_date_local to UNIC EPOCH, add movingtime (milli) seconds, uses fixed date and variable HH:MM:SS for yScale
+    })
+
+lines.transition()
+  .delay(function(d,i) {return (d.moving_time/2)})
+  .duration(1200)
+  .attr('x1', function(d) {
+  return yScale(new Date("2020-01-01 "+(d3.timeFormat("%H:%M:%S")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))))) // uses fixed date and variable HH:MM:SS for yScale
+})
+  .attr('x2', function(d) {
+  return yScale(new Date("2020-01-01 "+(d3.timeFormat("%H:%M:%S")(parseFloat(d3.timeFormat("%Q")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))+d.moving_time*1000)))); //calculate d.start_date_local to UNIC EPOCH, add movingtime (milli) seconds, uses fixed date and variable HH:MM:SS for yScale
+})
+  .attr('stroke-opacity', 1)
+
+}

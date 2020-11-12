@@ -291,45 +291,45 @@ width: 100%;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 120px 800px .05fr 80px;
     grid-gap: 20px;
-    max-width: 400px;
+    max-width: 350px;
     margin: auto;
     padding: 0px 20px 0px 20px;
     grid-auto-flow: row;
   }
+
 .chart {
   display: none;
+  visibility: hidden;
 }
 
-  .chartmobile {
+.chartmobile {
     display: block;
   }
-
-
 
   header {
     grid-row: header;
     grid-column: header;
     padding-top: 34px;
-    max-width: 400px;
+    max-width: 350px;
   }
 
   section {
     grid-row: chart;
     grid-column: chart;
-    max-width: 400px;
+    max-width: 350px;
   }
 
   main {
     column-count: 2;
     column-gap: 1em;
-    width: 400px;
+    width: 350px;
     margin: .5em 0 0 0;
   }
   footer {
     grid-row: footer;
     grid-column: footer;
     text-align: right;
-    max-width: 400px;
+    max-width: 350px;
   }
   .mobileBreakLine {
     border: 1px dotted #A99D5A; */

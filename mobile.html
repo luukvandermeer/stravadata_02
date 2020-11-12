@@ -1,41 +1,10 @@
-<!--
-Design
-- Fonts Calibre, Domaine & Filmotype Giant
-- Introduction page
-- Userflow from page to strava
-- font Sizing
-- Colouring
-
-
-METRICS.JS
-- Measuring interval between activities
-
-
-DUMBBELL.JS
-> Fix lines and dots for event which take longer then one DAY
-  Potential solution: Create two different dummbells. If day and movingtime are > 23:59:59, use two differetn line components.
-      if time of the day (including moving_time)> is bigger then 24:00:00 then +1 day.
-      https://stackoverflow.com/questions/18796291/d3-get-current-time-and-subtract-by-2-hours/18796598
-- Animation chart
-- Animation numbers -> https://observablehq.com/@d3/transition-texttween
-
-AREA.JS
-- Styled axis -> https://observablehq.com/@d3/styled-axes
-- Hightlight X axis -> https://bl.ocks.org/wjones127/4ee8ffdb1327cf34e13c3f256cbc18f1
-
-CSS
-
-
--->
-
-
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
+  <!-- <meta name="viewport" content="user-scalable=yes"> -->
   <title>Feltron Reports</title>
 
 <!-- CSS -->
@@ -46,19 +15,16 @@ CSS
   <script type="text/javascript" src="/js/d3.min.js"></script>
   <script type="text/javascript" src="/js/d3-array.min.js"></script>
   <script type="text/javascript" src="/js/metrics.js"></script>
-  <!-- <script type="text/javascript" src="/js/dumbbell.js"></script> -->
-  <!-- <script type="text/javascript" src="/js/mobile_dumbbell.js"></script> -->
   <script type="text/javascript" src="js/smallcharts.js"></script>
-
-
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script>
   $(document).ready(function(){
-    if($(window).width() <= 950) {
-  window.location = "mobile.html";
+    if($(window).width() >= 950) {
+  window.location = "index.html";
   }
   });
   </script>
+
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Oswald|PT+Mono&display=swap" rel="stylesheet">
@@ -80,8 +46,8 @@ CSS
     </header>
 
     <section>
-      <div class="chart">
-        <script type="text/javascript" src="/js/dumbbell.js"></script>
+      <div class="chartmobile">
+        <script type="text/javascript" src="/js/mobile_dumbbell.js"></script>
       </div>
         <hr class="breakLine">
     </section>

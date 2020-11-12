@@ -2,7 +2,7 @@ var margin = 48,
   width = 800,
   height = 400;
 
-var svg = d3.select('.chart')
+var svg = d3.select(".chart")
   .append('svg')
   .attr('width', 760 + 'px') //changed with to remove JAN tick on X axis
   .attr('height', height + 'px')
@@ -113,8 +113,12 @@ linesHover = svg.selectAll('linesHover') //creating array behind line for hover
       .data(data)
       .enter()
       .append('line')
-      .attr('x1', 0)
-      .attr('x2', 0)
+      .attr('x1', function(d) {
+          return xScale(new Date(d3.timeFormat("%Y,%m,%d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))) //calculates which day of the year
+      })
+      .attr('x2', function(d) {
+          return xScale(new Date(d3.timeFormat("%Y,%m,%d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))) //calculates which day of the year
+      })
       .attr("y1", 0+margin)
       .attr("y2", height-margin)
       .attr('stroke', '#FCE545')
@@ -196,20 +200,13 @@ function removeToolTip (d){
           .duration(100)
           .style("opacity", 0);
     }
-
-
-    // console.log(d3.timeFormat("%H:%M:%S")(parseFloat(d3.timeFormat("%Q")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")("2020-07-24T23:38:40Z")))+1994000));
-    // console.log(parseFloat(d3.timeFormat("%Q")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")("2020-02-15T01:24:32Z")))+1);
-    // console.log((d3.timeFormat("%Q")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")("2020-02-15T01:24:32Z")))+1);
-    // console.log(d3.timeFormat("%s")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")("2020-02-15T01:24:32Z")));
-    // console.log(d3.timeFormat("%H:%M:%S")(1581726272000));
 update();
 });
 
 
 function update(d,i){
 circlesX1.transition()
-  // .delay(120)
+
   .delay(function(d,i) {return (d.moving_time/2)})
   .duration(1200)
   .attr('r', 1.2)
@@ -219,7 +216,7 @@ circlesX1.transition()
   return yScale(new Date("2020-01-01 "+(d3.timeFormat("%H:%M:%S")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))))) // uses fixed date and variable HH:MM:SS for yScale
   })
 circlesX2.transition()
-    // .delay(120)
+
       .delay(function(d,i) {return (d.moving_time/2)})
     .duration(1200)
     .attr('r', 1.2)
@@ -229,8 +226,8 @@ circlesX2.transition()
       return yScale(new Date("2020-01-01 "+(d3.timeFormat("%H:%M:%S")(parseFloat(d3.timeFormat("%Q")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local)))+d.moving_time*1000)))); //calculate d.start_date_local to UNIC EPOCH, add movingtime (milli) seconds, uses fixed date and variable HH:MM:SS for yScale
     })
 lines.transition()
-// .delay(120)
-  .delay(function(d,i) {return (d.elapsed_time/2)})
+
+  .delay(function(d,i) {return (d.moving_time/2)})
 .duration(1200)
 
 .attr('y1', function(d) {

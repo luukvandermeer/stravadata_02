@@ -60,48 +60,70 @@ var activeTimeOfDay = d3.max(arrayActiveTimeOfDay, function (d) {if (d.value.mov
 var activeTimeOfDayDetails = d3.max(arrayActiveTimeOfDay, function(d) {if (d.value.moving_time >= (d3.max(arrayActiveTimeOfDay, d => d.value.moving_time))) {return [d.value.workouts]}})
 
   //Add variables to span
+  var durationRandom = d3.randomUniform(0, 600)
+  var delay = d3.randomUniform(2000, 2000)
   // d3.select(".workoutsCount").text((workoutsCount))
   d3.select(".activeYear").text(d3.timeFormat("%Y")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(tuffestDay)))
-  d3.select(".workoutsCount").text(0).transition().delay(2000).duration(2000).tween('text', tweenText(workoutsCount))
-  d3.select(".workoutsCountWeek").text(d3.format(",.1f")(workoutsCountWeek))
-  d3.select(".workoutsHoursTotal").text(d3.format(",.1f")(workoutsHours))
-  d3.select(".workoutsHoursPerDay").text(d3.format(",.2f")(workoutsHours / 365))
-  d3.select(".workoutsAlone").text(0).transition().delay(2000).duration(2000).tween('text', tweenText((workoutsCount - workoutsTogether)))
-  d3.select(".workoutsTogether").text(0).transition().delay(2000).duration(1200).tween('text', tweenText(workoutsTogether))
+  d3.select(".workoutsCount").text(0).transition().delay(delay).duration(durationRandom).tween('text', tweenText(workoutsCount))
+  d3.select(".workoutsCountWeek").text(0).transition().delay(delay).duration(durationRandom).tween('text', tweenTextDecimals((d3.format(",.1f")(workoutsCountWeek))))
+  d3.select(".workoutsHoursTotal").text(0).transition().delay(delay).duration(durationRandom).tween('text', tweenText((d3.format(",.1f")(workoutsHours))))
+  d3.select(".workoutsHoursPerDay").text(0).transition().delay(delay).duration(durationRandom).tween('text', tweenTextDecimals((d3.format(",.2f")(workoutsHours / 365))))
+  d3.select(".workoutsAlone").text(0).transition().delay(delay).duration(durationRandom).tween('text', tweenText((workoutsCount - workoutsTogether)))
+  d3.select(".workoutsTogether").text(0).transition().delay(delay).duration(durationRandom).tween('text', tweenText(workoutsTogether))
   d3.select(".workoutsHoursChange").text((d3.format("+.0%")((workoutsHoursTogetherMean - workoutsHoursAloneMean) / workoutsHoursAloneMean)) + " " + (workoutsAloneTogether))
-  d3.select(".countriesVisitedCount").text(0).transition().delay(2000).duration(2000).tween('text', tweenText((d3.format(",.0f")(countriesVisitedCount.length))))
-  d3.select(".countriesVisited").text((countriesVisited.join(' | ')))
-  d3.select(".tuffestDay").text(d3.timeFormat("%b %d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(tuffestDay))) //Calculate date format to timeParse and the to timeFormat Month day
-  d3.select(".tuffestDayDetails").text((tuffestDayDetails.join(' | ')))
-  d3.select(".farthestDistance").text((d3.format(",.0f")((farthestDistance))))
-  d3.select(".farthestDistanceDetails").text((farthestDistanceDetails.join(' | ')))
-  d3.select(".shortestDistance").text((d3.format(",.0f")((shortestDistance))))
-  d3.select(".shortestDistanceDetails").text((shortestDistanceDetails.join(' | ')))
-  d3.select(".mostActiveMonth").text(mostActiveMonth)
-  d3.select(".mostActiveMonthDetails").text((mostActiveMonthDetails.join(' | ')))
-  d3.select(".leastActiveMonth").text(leastActiveMonth)
-  d3.select(".leastActiveMonthDetails").text((leastActiveMonthDetails.join(' | ')))
-  d3.select(".activeTimeOfDay").text(activeTimeOfDay + ":00")
-  d3.select(".activeTimeOfDayDetails").text(activeTimeOfDayDetails)
+  d3.select(".countriesVisitedCount").text(0).transition().delay(delay).duration(durationRandom).tween('text', tweenText((d3.format(",.0f")(countriesVisitedCount.length))))
+  d3.select(".countriesVisited").text(".").style("color", "#FCE545").transition().style("opacity", 0).delay(delay).duration(durationRandom).transition().style("opacity",1).style("color", "#55546E").text((countriesVisited.join(' | ')))
+  d3.select(".tuffestDay").text(".").style("color", "#FCE545").transition().style("opacity", 0).delay(delay).duration(durationRandom).transition().style("opacity",1).style("color", "#55546E").text(d3.timeFormat("%b %d")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(tuffestDay))) //Calculate date format to timeParse and the to timeFormat Month day
+  d3.select(".tuffestDayDetails").text(".").style("color", "#FCE545").transition().style("opacity", 0).delay(delay).duration(durationRandom).transition().style("opacity",1).style("color", "#55546E").text((tuffestDayDetails.join(' | ')))
+  d3.select(".farthestDistance").text(0).transition().delay(delay).duration(durationRandom).tween('text', tweenText((farthestDistance/1000)))
+  d3.select(".farthestDistanceDetails").text(".").style("color", "#FCE545").transition().style("opacity", 0).delay(delay).duration(durationRandom).transition().style("opacity",1).style("color", "#55546E").text((farthestDistanceDetails.join(' | ')))
+  d3.select(".shortestDistance").text(0).transition().delay(delay).duration(durationRandom).tween('text', tweenText((d3.format(",.0f")((shortestDistance)))))
+  d3.select(".shortestDistanceDetails").text(".").style("color", "#FCE545").transition().style("opacity", 0).delay(delay).duration(durationRandom).transition().style("opacity",1).style("color", "#55546E").text((shortestDistanceDetails.join(' | ')))
+  d3.select(".mostActiveMonth").text(".").style("color", "#FCE545").transition().style("opacity", 0).delay(delay).duration(durationRandom).transition().style("opacity",1).style("color", "#55546E").text(mostActiveMonth)
+  d3.select(".mostActiveMonthDetails").text(".").style("color", "#FCE545").transition().style("opacity", 0).delay(delay).duration(durationRandom).transition().style("opacity",1).style("color", "#55546E").text((mostActiveMonthDetails.join(' | ')))
+  d3.select(".leastActiveMonth").text(".").style("color", "#FCE545").transition().style("opacity", 0).delay(delay).duration(durationRandom).transition().style("opacity",1).style("color", "#55546E").text(leastActiveMonth)
+  d3.select(".leastActiveMonthDetails").text(".").style("color", "#FCE545").transition().style("opacity", 0).delay(delay).duration(durationRandom).transition().style("opacity",1).style("color", "#55546E").text((leastActiveMonthDetails.join(' | ')))
+  d3.select(".activeTimeOfDay").text(".").style("color", "#FCE545").transition().style("opacity", 0).delay(delay).duration(durationRandom).transition().style("opacity",1).style("color", "#55546E").text(activeTimeOfDay + ":00")
+  d3.select(".activeTimeOfDayDetails").text(0).transition().delay(delay).duration(durationRandom).tween('text', tweenText(activeTimeOfDayDetails))
 
-  d3.select(".workoutsRealdeal").text((workoutsCount - workoutsVirtual))
-  d3.select(".workoutsVirtual").text(workoutsVirtual)
+  d3.select(".workoutsRealdeal").text(0).transition().delay(delay).duration(durationRandom).tween('text', tweenText((workoutsCount - workoutsVirtual)))
+  d3.select(".workoutsVirtual").text(0).transition().delay(delay).duration(durationRandom).tween('text', tweenText((workoutsVirtual)))
   d3.select(".workoutsHoursChangeVirtual").text((d3.format("+.0%")((workoutsHoursVirtualMean - workoutsHoursRealDealMean) / workoutsHoursRealDealMean)) + " " + (workoutsRealdealVirtual))
 
-  d3.select(".climbing").text(d3.format(",.0f")(climbing) + "m")
-  d3.select(".climbingDetails").text(d3.format(".1f")(climbingDetails) + "x")
-  d3.select(".calories").text(d3.format(",.0f")(calories))
-  d3.select(".caloriesDetails").text(d3.format(",.0f")(caloriesDetails))
+  d3.select(".climbing").text(0).transition().delay(delay).duration(durationRandom).tween('text', (tweenTextThousands((climbing)))) + "m"
+  d3.select(".climbingDetails").text(".").style("color", "#FCE545").transition().style("opacity", 0).delay(delay).duration(durationRandom).transition().style("opacity",1).style("color", "#55546E").text(d3.format(".1f")(climbingDetails) + "x")
+  d3.select(".calories").text(0).transition().delay(delay).duration(durationRandom).tween('text', tweenTextThousands((calories)))
+  d3.select(".caloriesDetails").text(0).transition().delay(delay).duration(durationRandom).tween('text', tweenTextThousands((caloriesDetails)))
 
   // Tween animation of numbers
   function tweenText(newValue) {
     return function() {
-      // get current value as starting point for tween animation
       var currentValue = +this.textContent;
       // create interpolator and do not show nasty floating numbers
       var i = d3.interpolateRound(currentValue, newValue);
       return function(t) {
         this.textContent = i(t);
+      };
+    }
+  }
+
+  // Tween animation of numbers
+  function tweenTextDecimals(newValue) {
+    return function() {
+      var currentValue = +this.textContent;
+      var i = d3.interpolate(currentValue, newValue);
+      return function(t) {
+                d3.select(this).text(d3.format(",.2f")(i(t)));
+      };
+    }
+  }
+
+  function tweenTextThousands(newValue) {
+    return function() {
+      var currentValue = +this.textContent;
+      var i = d3.interpolate(currentValue, newValue);
+      return function(t) {
+                d3.select(this).text(d3.format(",.0f")(i(t)));
       };
     }
   }
