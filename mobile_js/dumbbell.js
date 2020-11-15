@@ -1,5 +1,5 @@
 var margin = 30,
-  width = 350,
+  width = 300,
   height = 800;
 
 var svg = d3.select(".chartmobile")

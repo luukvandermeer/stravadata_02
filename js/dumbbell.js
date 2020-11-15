@@ -204,11 +204,14 @@ update();
 });
 
 
+var durationRandom = d3.randomUniform(800, 1500)
+
+
 function update(d,i){
 circlesX1.transition()
 
-  .delay(function(d,i) {return (d.moving_time/2)})
-  .duration(1200)
+  .delay(function(d,i) {return (d.moving_time/5)})
+  .duration(durationRandom)
   .attr('r', 1.2)
   .attr('opacity', 1)
 
@@ -217,8 +220,8 @@ circlesX1.transition()
   })
 circlesX2.transition()
 
-      .delay(function(d,i) {return (d.moving_time/2)})
-    .duration(1200)
+      .delay(function(d,i) {return (d.moving_time/5)})
+    .duration(durationRandom)
     .attr('r', 1.2)
     .attr('opacity', 2)
 
@@ -227,9 +230,8 @@ circlesX2.transition()
     })
 lines.transition()
 
-  .delay(function(d,i) {return (d.moving_time/2)})
-.duration(1200)
-
+  .delay(function(d,i) {return (d.moving_time/5)})
+.duration(durationRandom)
 .attr('y1', function(d) {
   return yScale(new Date("2020-01-01 "+(d3.timeFormat("%H:%M:%S")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(d.start_date_local))))) // uses fixed date and variable HH:MM:SS for yScale
 })

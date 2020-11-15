@@ -60,7 +60,7 @@ var activeTimeOfDay = d3.max(arrayActiveTimeOfDay, function (d) {if (d.value.mov
 var activeTimeOfDayDetails = d3.max(arrayActiveTimeOfDay, function(d) {if (d.value.moving_time >= (d3.max(arrayActiveTimeOfDay, d => d.value.moving_time))) {return [d.value.workouts]}})
 
   //Add variables to span
-  var durationRandom = d3.randomUniform(0, 600)
+  var durationRandom = d3.randomUniform(500, 1000)
   var delay = d3.randomUniform(2000, 2000)
   // d3.select(".workoutsCount").text((workoutsCount))
   d3.select(".activeYear").text(d3.timeFormat("%Y")(d3.timeParse("%Y-%m-%dT%H:%M:%SZ")(tuffestDay)))
@@ -82,6 +82,7 @@ var activeTimeOfDayDetails = d3.max(arrayActiveTimeOfDay, function(d) {if (d.val
   d3.select(".mostActiveMonth").text(".").style("color", "#FCE545").transition().style("opacity", 0).delay(delay).duration(durationRandom).transition().style("opacity",1).style("color", "#55546E").text(mostActiveMonth)
   d3.select(".mostActiveMonthDetails").text(".").style("color", "#FCE545").transition().style("opacity", 0).delay(delay).duration(durationRandom).transition().style("opacity",1).style("color", "#55546E").text((mostActiveMonthDetails.join(' | ')))
   d3.select(".leastActiveMonth").text(".").style("color", "#FCE545").transition().style("opacity", 0).delay(delay).duration(durationRandom).transition().style("opacity",1).style("color", "#55546E").text(leastActiveMonth)
+
   d3.select(".leastActiveMonthDetails").text(".").style("color", "#FCE545").transition().style("opacity", 0).delay(delay).duration(durationRandom).transition().style("opacity",1).style("color", "#55546E").text((leastActiveMonthDetails.join(' | ')))
   d3.select(".activeTimeOfDay").text(".").style("color", "#FCE545").transition().style("opacity", 0).delay(delay).duration(durationRandom).transition().style("opacity",1).style("color", "#55546E").text(activeTimeOfDay + ":00")
   d3.select(".activeTimeOfDayDetails").text(0).transition().delay(delay).duration(durationRandom).tween('text', tweenText(activeTimeOfDayDetails))
@@ -127,5 +128,16 @@ var activeTimeOfDayDetails = d3.max(arrayActiveTimeOfDay, function(d) {if (d.val
       };
     }
   }
+
+//   const alphabet = " abcdefghijklmnopqrstuvwxyz".split("");
+//
+//
+// function tweenLetters(newValue) {
+//
+// d3.select(this).text(oldText.map(function(d,i){
+//   return alphabet[~~(d3.interpolate(alphabet.indexOf(d), alphabet.indexOf(newText[i]))(t))]
+// }).join(""))
+// }
+
 
 });

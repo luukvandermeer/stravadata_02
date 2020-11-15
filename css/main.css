@@ -209,6 +209,10 @@ height: 110px;
   margin: 4px;
 }
 
+.mostActiveMonth, .leastActiveMonth{
+  text-transform: uppercase;
+}
+
 /* METRICS */
 .metricBig {
   padding: 4px;
@@ -278,8 +282,10 @@ width: 100%;
 }
 
 
+
+
 /* CSS Mobile */
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
   #container {
     display: grid;
     background: #FCE545;
@@ -291,7 +297,7 @@ width: 100%;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 120px 800px .05fr 80px;
     grid-gap: 20px;
-    max-width: 350px;
+    max-width: 300px;
     margin: auto;
     padding: 0px 20px 0px 20px;
     grid-auto-flow: row;
@@ -310,30 +316,38 @@ width: 100%;
     grid-row: header;
     grid-column: header;
     padding-top: 34px;
-    max-width: 350px;
+    max-width: 300px;
   }
 
   section {
     grid-row: chart;
     grid-column: chart;
-    max-width: 350px;
+    max-width: 300px;
   }
 
   main {
     column-count: 2;
     column-gap: 1em;
-    width: 350px;
+    width: 300px;
     margin: .5em 0 0 0;
   }
   footer {
     grid-row: footer;
     grid-column: footer;
     text-align: right;
-    max-width: 350px;
+    max-width: 300px;
   }
   .mobileBreakLine {
     border: 1px dotted #A99D5A; */
   }
 
-
+#valuesDark, #valuesLight{
+      font-size: 100px;
+}
+  #valuesDarkMedium,    #valuesLightMedium{
+  font-size: 80px;
+  }
+  #valuesDarkSmall, #valuesLightMedium {
+font-size: 60px;
+  }
 }

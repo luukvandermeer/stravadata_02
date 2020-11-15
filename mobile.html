@@ -11,15 +11,15 @@
   <link href="/css/main.css" rel="stylesheet">
 <!-- Favicon -->
   <link rel="shortcut icon" type="image/png" href="image/LvdM-06.png">
-<!-- JS -->
+<!-- MOBILE JS -->
   <script type="text/javascript" src="/js/d3.min.js"></script>
   <script type="text/javascript" src="/js/d3-array.min.js"></script>
   <script type="text/javascript" src="/js/metrics.js"></script>
-  <script type="text/javascript" src="js/smallcharts.js"></script>
+  <script type="text/javascript" src="/mobile_js/smallcharts.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script>
   $(document).ready(function(){
-    if($(window).width() >= 950) {
+    if($(window).width() >= 901) {
   window.location = "index.html";
   }
   });
@@ -47,7 +47,7 @@
 
     <section>
       <div class="chartmobile">
-        <script type="text/javascript" src="/js/mobile_dumbbell.js"></script>
+        <script type="text/javascript" src="/mobile_js/dumbbell.js"></script>
       </div>
         <hr class="breakLine">
     </section>
@@ -161,10 +161,10 @@
         <h5><span class="tuffestDayDetails" id="valuesFooter"></span></h5>
         <hr class="breakLine">
       </div>
-      <div class="metricSmall">
+      <!-- <div class="metricSmall">
         <h4>MOST REFRESHED DAY</h4>
             <hr class="breakLine">
-      </div>
+      </div> -->
       <div class="metricMedium">
         <h4>SUFFERSCORE PER MONTH</h4>
         <svg id="areaSufferScorePerMonth" class="areaSufferScorePerMonth">

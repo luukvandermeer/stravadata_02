@@ -19,7 +19,7 @@ function tweenText(newValue) {
 d3.json('data.json').then(function(data) {
 
   var margin = 4,
-    width = 185,
+    width = 150,
     height = 100,
     textHeight = 20
 
@@ -115,7 +115,7 @@ areaWorkoutsPerWeek //PATTERN AREACHART
 d3.json('data.json').then(function(data) {
 
   var margin = 4,
-    width = 185,
+    width = 150,
     height = 100,
     textHeight = 20
 
@@ -201,7 +201,7 @@ areaSufferScorePerMonth.selectAll("circlesArea")
 d3.json('data.json').then(function(data) {
 
   var margin = 4,
-    width = 185,
+    width = 140,
     height = 125 - margin
 
   var barsCountWorkouts = d3.select("#barsCountWorkouts")
@@ -289,7 +289,7 @@ barsCountWorkouts.selectAll('text1')
 d3.json('data.json').then(function(data) {
 
   var margin = 4,
-    width = 185,
+    width = 140,
     height = 125 - margin
 
   var barsHoursWorkouts = d3.select("#barsHoursWorkouts")
@@ -376,7 +376,7 @@ barsHoursWorkouts.selectAll('text1')
 d3.json('data.json').then(function(data) {
 
   var margin = 4,
-    width = 185,
+    width = 140,
     height = 125 - margin
 
   var barsDistanceWorkouts = d3.select("#barsDistanceWorkouts")
