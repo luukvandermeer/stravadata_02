@@ -18,13 +18,23 @@
   <script type="text/javascript" src="/mobile_js/smallcharts.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script>
+
+  var before = $(this).width();
+
+  $(window).resize(function() {
+      var after = $(this).width();
+     if (after >= before && after >= 901) {
+        location.reload()
+     }
+  })
+
   $(document).ready(function(){
     if($(window).width() >= 901) {
-  window.location = "index.html";
+  window.location.replace('http://luukvandermeer.com/stravadata/');
   }
-  });
-  </script>
+  })
 
+  </script>
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Oswald|PT+Mono&display=swap" rel="stylesheet">

@@ -15,17 +15,24 @@
   <script type="text/javascript" src="/js/d3-array.min.js"></script>
   <script type="text/javascript" src="/js/metrics.js"></script>
   <script type="text/javascript" src="js/smallcharts.js"></script>
-
-
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script>
+
   $(document).ready(function(){
     if($(window).width() <= 900) {
-      // location.reload(true);
   window.location = "mobile.html";
-
   }
-  });
+  })
+
+  var before = $(this).width();
+
+  $(window).resize(function() {
+      var after = $(this).width();
+     if (after <= before && after <= 900) {
+        location.reload()
+     }
+  })
+
   </script>
 
   <!-- Fonts -->
